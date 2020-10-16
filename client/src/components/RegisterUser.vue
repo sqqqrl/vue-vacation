@@ -4,7 +4,7 @@
       <label for="name">
         Name:
       </label>
-      <input v-model="name" type="text" name="name" value>
+      <input v-model="username" type="text" name="name" value>
       <label for="email">
         Email:
       </label>
@@ -30,7 +30,7 @@ export default {
   name: 'RegisterUser',
   data () {
     return {
-      name: '',
+      username: '',
       email: '',
       password: '',
       status: null
@@ -40,7 +40,7 @@ export default {
     register () {
       this.$store
         .dispatch('register', {
-          name: this.name,
+          username: this.username,
           email: this.email,
           password: this.password
         })

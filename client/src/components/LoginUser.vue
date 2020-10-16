@@ -8,8 +8,8 @@
       Password:
     </label>
     <input v-model="password" type="password" name value>
-    <p v-if="status.code !== 200">
-      {{ status.msg }}
+    <p v-if="status">
+      {{ status }}
     </p>
     <button type="submit" name="button">
       Login
@@ -24,22 +24,21 @@ export default {
     return {
       email: '',
       password: '',
-      status: {
-        code: 200,
-        msg: ''
-      }
+      status: ''
     }
   },
   methods: {
     login () {
-      this.$store
-        .dispatch('login', {
-          email: this.email,
-          password: this.password
-        })
-        .catch(( err ) => {
-          this.status = err
-        })
+      this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      })
+      .then(status => {
+        this.status = status
+      })
+      .catch(err => {
+        console.error(err);
+      })
     }
   }
 }

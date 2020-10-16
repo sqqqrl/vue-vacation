@@ -1,25 +1,25 @@
 <template>
   <div id="nav">
     <router-link to="/">
-Home
-</router-link>
+      Home
+    </router-link>
 
     <template v-if="user">
       <router-link to="dashboard">
-Dashboard
-</router-link>
+        Dashboard
+      </router-link>
 
-      <span class="nav-welcome">Hello, {{ user.name }}.</span>
+      <span class="nav-welcome">Hello, {{ user.username }}.</span>
 
       <button type="button" class="logoutButton" @click="logout">
-Log out
-</button>
+        Log out
+      </button>
     </template>
 
     <template v-else>
       <router-link to="authenticate" class="button">
-Login
-</router-link>
+        Login
+      </router-link>
     </template>
   </div>
 </template>
@@ -27,7 +27,7 @@ Login
 <script>
 export default {
   computed: {
-    user () {
+    user: function () {
       return this.$store.state.user
     }
   },

@@ -13,7 +13,7 @@ export default new Vuex.Store({
     SET_USER_DATA (state, userData) {
       localStorage.setItem('user', JSON.stringify(userData))
       axios.defaults.headers.common['Authorization'] = `Bearer ${
-        userData.token
+        userData.accessToken
       }`
       state.user = userData
     },
@@ -28,17 +28,15 @@ export default new Vuex.Store({
   actions: {
     register ({ commit }, credentials) {
       return axios
-        .post('//localhost:3000/register', credentials)
+        .post('//localhost:3000/api/auth/signup', credentials)
         .then(({ data }) => {
           commit('SET_USER_DATA', data)
         })
     },
     login ({ commit }, credentials) {
       return axios
-        .post('//localhost:3000/login', credentials)
-        .then(({ data }) => {
-          commit('SET_USER_DATA', data)
-        })
+        .post('//localhost:3000/api/auth/signin', credentials)
+        .then( ({ data }) => commit('SET_USER_DATA', data))
     },
     logout ({ commit }) {
       commit('LOGOUT')
