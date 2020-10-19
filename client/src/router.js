@@ -38,6 +38,10 @@ router.beforeEach((to, from, next) => {
     return next('/authenticate')
   }
 
+  if (!authRequired && loggedIn && to.name === "authenticate") {
+    return next('/')
+  }
+
   next()
 })
 

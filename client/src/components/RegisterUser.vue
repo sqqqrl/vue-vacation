@@ -14,8 +14,8 @@
         Password:
       </label>
       <input v-model="password" type="password" name value>
-      <p v-if="status === 400">
-        Please enter different info.
+      <p v-if="error">
+        {{ error }}
       </p>
 
       <button type="submit" name="button">
@@ -33,7 +33,7 @@ export default {
       username: '',
       email: '',
       password: '',
-      status: null
+      error: null
     }
   },
   methods: {
@@ -44,8 +44,8 @@ export default {
           email: this.email,
           password: this.password
         })
-        .then(() => { this.$router.push({ name: 'dashboard' }) })
-        .catch(err => { this.status = err.response.status })
+        .then(() => this.$store.dispatch('isNewUser', true))
+        .catch(err => this.error = err.response.data.message)
     }
   }
 }
