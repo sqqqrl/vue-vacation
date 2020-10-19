@@ -4,7 +4,7 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     user: null,
     isNewUser: true
@@ -40,6 +40,13 @@ export default new Vuex.Store({
     },
     isNewUser ({ commit }, isNewUser) {
       commit('IS_NEW_USER', isNewUser)
+    },
+    role ({ commit }, credentials) {
+      return axios 
+        .post('//localhost:3000/api/auth/role', credentials)
+        .then( ({ data }) => data )
     }
   }
 });
+
+export default store

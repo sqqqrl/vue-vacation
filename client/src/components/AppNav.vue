@@ -9,6 +9,10 @@
         Dashboard
       </router-link>
 
+      <router-link to="vacation">
+        Vacation
+      </router-link>
+
       <span class="nav-welcome">Hello, {{ user.username }}.</span>
 
       <button type="button" class="logoutButton" @click="logout">

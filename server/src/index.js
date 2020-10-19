@@ -20,9 +20,27 @@ db.mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => {
+  .then( async () => {
     console.log("Successfully connect to MongoDB.");
     initial();
+
+
+    // let adminId = await db.role.findOne({ name: "admin" }, (err, roleObj) => {
+    //   if (err) console.log(err);
+    //   return roleObj._id
+    // })
+
+    // db.user.updateOne({email: "mkpmkp@drydr.kigh"}, { $push: { roles: adminId } }, (err, hand) => {
+    //   if (err) console.log(err);
+    //   console.log(hand);
+    // })
+
+    // db.user.findOne({ email: "mkpmkp@drydr.kigh" }, (err, user) => {
+    //   if (err) console.log(err);
+    //   console.log(user);
+    // })
+
+    
   })
   .catch(err => {
     console.error("Connection error", err);
@@ -56,7 +74,7 @@ function initial() {
         console.log("added 'moderator' to roles collection");
       });
     }
-  })
+  });
 }
 
 require('./routes/auth.routes')(app);

@@ -6,6 +6,8 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+const toCorrectFormat = (roles) => roles.map(role => "ROLE_" + role.name.toUpperCase());
+
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
@@ -93,11 +95,8 @@ exports.signin = (req, res) => {
         expiresIn: 86400 // 24 hours
       });
 
-      var authorities = [];
-
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-      }
+      const authorities = toCorrectFormat(user.roles);
+      
       res.status(200).send({
         id: user._id,
         username: user.username,
@@ -107,3 +106,17 @@ exports.signin = (req, res) => {
       });
     });
 };
+
+exports.getRole = (req, res) => {
+  if (req.body.id === undefined || req.body.id === null) {
+    return res.status(404).send({ message: "User Not found." });
+  } 
+  User.findById(req.body.id)
+    .populate("roles", "-__v")
+    .exec((err, user) => {
+      if (err) return res.status(404).send({ message: "Role Not found." })
+      const resRoles = toCorrectFormat(user.roles)
+
+      return res.status(200).send(resRoles)
+    })
+}
