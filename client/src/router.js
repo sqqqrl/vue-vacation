@@ -53,17 +53,11 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (loggedIn) {
-    const userRoles = await store.dispatch('role', { id: JSON.parse(loggedIn).id });
 
     switch(to.name) {
 
       case 'authenticate': 
         return next('/')
-
-      case 'users':
-        if (!userRoles.includes("ROLE_ADMIN")) {
-          return next('/')
-        }
 
       default: 
         return next()

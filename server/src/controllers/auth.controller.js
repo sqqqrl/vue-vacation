@@ -106,17 +106,3 @@ exports.signin = (req, res) => {
       });
     });
 };
-
-exports.getRole = (req, res) => {
-  if (req.body.id === undefined || req.body.id === null) {
-    return res.status(404).send({ message: "User Not found." });
-  } 
-  User.findById(req.body.id)
-    .populate("roles", "-__v")
-    .exec((err, user) => {
-      if (err) return res.status(404).send({ message: "Role Not found." })
-      const resRoles = toCorrectFormat(user.roles)
-
-      return res.status(200).send(resRoles)
-    })
-}

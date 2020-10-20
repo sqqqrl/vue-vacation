@@ -41,10 +41,10 @@ const store = new Vuex.Store({
     isNewUser ({ commit }, isNewUser) {
       commit('IS_NEW_USER', isNewUser)
     },
-    role ({ commit }, credentials) {
-      return axios 
-        .post('//localhost:3000/api/auth/role', credentials)
-        .then( ({ data }) => data )
+    getAllUsers({ commit }) {
+      return axios
+        .post('//localhost:3000/api/users/getAllUsers', { id: this.state.user.id })
+        .then( ({data}) => data )
     }
   }
 });

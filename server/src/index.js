@@ -77,7 +77,7 @@ function initial() {
   });
 }
 
-require('./routes/auth.routes')(app);
+require('./routes/index')(app);
 app.listen(config.port, () => {
   console.log('Server start on port:' + config.port);
 })

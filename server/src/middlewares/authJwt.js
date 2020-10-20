@@ -22,7 +22,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.body.id).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
