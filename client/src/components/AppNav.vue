@@ -13,6 +13,10 @@
         Vacation
       </router-link>
 
+      <router-link v-if="user.roles.includes('ROLE_ADMIN')" to="users">
+        Users
+      </router-link>
+
       <span class="nav-welcome">Hello, {{ user.username }}.</span>
 
       <button type="button" class="logoutButton" @click="logout">
