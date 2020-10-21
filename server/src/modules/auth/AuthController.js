@@ -11,7 +11,6 @@ class AuthController extends BaseController {
         
         return router
     }
-
 }
 
 module.exports = { AuthController }
