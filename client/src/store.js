@@ -32,7 +32,7 @@ const store = new Vuex.Store({
     },
     login ({ commit }, credentials) {
       return axios
-        .post('//localhost:3000/api/auth/signin', credentials)
+        .post('//localhost:3000/auth/login', credentials)
         .then( ({ data }) => commit('SET_USER_DATA', data))
     },
     logout ({ commit }) {

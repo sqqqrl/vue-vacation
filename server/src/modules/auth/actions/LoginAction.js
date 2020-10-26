@@ -1,9 +1,12 @@
 const { UserDAO } = require('../../../dao/UserDAO')
+const { checkPassword } = require('../../../rootcommon/checkPassword')
 
-class LoginAction extends BaseAction {
+class LoginAction {
   static get accessTag () {
     return 'auth:login'
   }
+
+  // TODO: VALIDATION
 
   // static get validationRules () {
   //   return {
@@ -19,9 +22,13 @@ class LoginAction extends BaseAction {
     let user = {}
 
     try {
-      user = await UserDAO.getByEmail(ctx.body.email)
+      user = await UserDAO.getByEmail(ctx.body.email);
+      await checkPassword(ctx.body.password, user.password);
     } catch (error) {
-
+      console.log(error);
     }
+    return user;
   }
 }
+
+module.exports = { LoginAction }

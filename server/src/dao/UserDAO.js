@@ -1,7 +1,7 @@
-const { BaseDAO } = require('./BaseDAO')
-const { UserModel } = require('../models/UserModel')
+// const { BaseDAO } = require('./BaseDAO')
+const UserModel = require('../models/user.model')
 
-class UserDAO extends BaseDAO {
+class UserDAO {
   static get tableName () {
     return 'users'
   }
@@ -9,13 +9,9 @@ class UserDAO extends BaseDAO {
 
   static async getByEmail (email) {
     // assert.validate(email, UserModel.schema.email, { required: true })
-    UserModel.findOne({
-      email: req.body.email
-    })
-
-    const data = await this.query().where({ email }).first()
-    if (!data) throw this.errorEmptyResponse()
-    return data
+    const user = await UserModel.findOne({ email: email });
+    
+    return user
   }
 }
 
