@@ -1,7 +1,9 @@
 const { UserDAO } = require('../../../dao/UserDAO')
 const { checkPassword } = require('../../../rootcommon/checkPassword')
+const { makeAccessToken } = require('../common/makeAccessToken')
+const { BaseAction } = require('../../../rootcommon/BaseAction')
 
-class LoginAction {
+class LoginAction extends BaseAction {
   static get accessTag () {
     return 'auth:login'
   }
@@ -27,7 +29,11 @@ class LoginAction {
     } catch (error) {
       console.log(error);
     }
-    return user;
+    return this.result({
+      data: {
+        accessToken: await makeAccessToken(user)
+      }
+    })
   }
 }
 
