@@ -1,13 +1,14 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const config = require('./config/config')
+const controllers = require('./controllersNew')
 
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
-
 
 //db config
 const db = require("./models");
@@ -77,9 +78,13 @@ function initial() {
   });
 }
 
-require('./routes/index')(app);
+
+for (const controller of controllers.map(Controller => new Controller())) {
+  app.use(controller.router)
+}
+
+// require('./routes/index')(app);
+
 app.listen(config.port, () => {
   console.log('Server start on port:' + config.port);
 })
-
-
