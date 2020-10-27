@@ -1,4 +1,7 @@
 const SECRET = require('../../../config').token.access.secret
+const expiresIn = require('../../../config').token.access.expiresIn
+const type = require('../../../config').token.access.type
+const iss = require('../../../config').token.jwtIss
 
 function makeAccessToken (userEntity) {
   let config = {

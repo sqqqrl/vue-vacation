@@ -1,8 +1,11 @@
 const { BaseConfig } = require('../rootcommon/BaseConfig')
+const expiresInRegexp = /^(\d\d?m$|\d\d?h$|\d\d?d$)/
 
 class TokenConfig extends BaseConfig {
   constructor () {
     super()
+
+    this.jwtIss = this.set('JWT_ISS', this.joi.string().required())
 
     this.access = {
       type: 'TOKEN_TYPE_ACCESS',

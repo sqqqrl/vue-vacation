@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -10,7 +9,6 @@ const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
-
 
 //db config
 const db = require("./models");
@@ -90,5 +88,3 @@ for (const controller of controllers.map(Controller => new Controller())) {
 app.listen(config.port, () => {
   console.log('Server start on port:' + config.port);
 })
-
-
