@@ -1,3 +1,5 @@
+const { jwtSign } = require('../../../rootcommon/jwt')
+
 const SECRET = require('../../../config').token.access.secret
 const expiresIn = require('../../../config').token.access.expiresIn
 const type = require('../../../config').token.access.type
