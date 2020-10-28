@@ -19,6 +19,10 @@ class TokenConfig extends BaseConfig {
         }
       }
     }
+
+    this.refresh = {
+      expiresIn: this.set('TOKEN_REFRESH_EXP', this.joi.string().regex(expiresInRegexp).required())
+    }
     
   }
 }
