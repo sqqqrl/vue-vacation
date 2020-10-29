@@ -3,21 +3,23 @@
     <label for="email">
       Email:
     </label>
-    <input v-model="email" type="email" name="email" value>
+    <input v-model="email" type="email" name="email">
     <label for="password">
       Password:
     </label>
-    <input v-model="password" type="password" name value>
+    <input v-model="password" type="password" @keyup.enter="makeLogin">
     <p v-if="error">
       {{ error }}
     </p>
-    <button type="submit" name="button">
+    <button @keyup.enter="makeLogin">
       Login
     </button>
   </form>
 </template>
 
 <script>
+import { AuthService } from '@/services/auth.service'
+
 export default {
   name: 'LoginUser',
   data () {
@@ -28,17 +30,15 @@ export default {
     }
   },
   methods: {
-    login () {
-      this.$store.dispatch('login', {
-        email: this.email,
-        password: this.password
-      })
-      .then(status => {
-        this.$router.push({ name: 'dashboard' })
-      })
-      .catch(err => {
-        this.error = err.response.data.message;
-      })
+    async makeLogin () {
+      try {
+        await AuthService.makeLogin({ email: this.email, password: this.password })
+        this.error = ''
+        await this.$store.dispatch('user/getCurrent')
+        await this.$router.push('profile')
+      } catch (error) {
+        this.error = error.status === 404 ? 'User with same email not found' : error.message
+      }
     }
   }
 }
