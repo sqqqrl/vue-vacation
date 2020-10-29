@@ -5,7 +5,6 @@ import Dashboard from './views/Dashboard.vue'
 import Authenticate from './views/Authenticate.vue'
 import Vacation from './views/Vacation.vue'
 import Users from './views/Users.vue'
-import store from './store'
 
 
 Vue.use(Router)
