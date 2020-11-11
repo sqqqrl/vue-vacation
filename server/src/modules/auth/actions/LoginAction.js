@@ -5,6 +5,7 @@ const { checkPassword } = require('../../../rootcommon/checkPassword')
 const { makeAccessToken } = require('../common/makeAccessToken')
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { RefreshSessionEntity } = require('../common/RefreshSessionEntity')
+const { addRefreshSession } = require('../common/addRefreshSession')
 const config = require('../../../config')
 
 class LoginAction extends BaseAction {
@@ -45,6 +46,9 @@ class LoginAction extends BaseAction {
       fingerprint: ctx.body.fingerprint,
       expiresIn: refTokenExpiresInMilliseconds
     })
+
+    
+    await addRefreshSession(newRefreshSession)
 
     return this.result({
       data: {

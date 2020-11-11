@@ -47,7 +47,6 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   })
-
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
@@ -80,6 +79,7 @@ function initial() {
 
 
 for (const controller of controllers.map(Controller => new Controller())) {
+  console.log(controller);
   app.use(controller.router)
 }
 

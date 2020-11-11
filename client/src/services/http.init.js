@@ -9,7 +9,7 @@ export class Http {
     this.instance = axios.create({
       baseURL: API_URL
     })
-
+    
     return this.init()
   }
 
@@ -26,13 +26,13 @@ export class Http {
               return request
             }).catch(error => Promise.reject(error))
         } else {
+          console.log('req', request);
           return request
         }
       }, error => {
         return Promise.reject(error)
       })
     }
-
     return this.instance
   }
 }
