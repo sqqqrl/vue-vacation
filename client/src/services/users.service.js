@@ -9,7 +9,6 @@ export class UsersService extends BaseService {
   static async getCurrent () {
     try {
       const response = await this.request({ auth: true }).get(`${this.entity}/current`)
-      console.log(response);
       return new ResponseWrapper(response, response.data.data)
     } catch (error) {
       const message = error.response.data ? error.response.data.error : error.response.statusText

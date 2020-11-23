@@ -6,7 +6,6 @@ class BaseDAO {
   }
 
   static async baseCreate (entity = {}) {
-    console.log(this.createModel(entity));
     return this.createModel(entity).save(err => {
       console.log(err);
     })

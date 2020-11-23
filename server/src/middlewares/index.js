@@ -1,7 +1,15 @@
-const authJwt = require("./authJwt");
-const verifySignUp = require("./verifySignUp");
+// const { InitMiddleware } = require('./InitMiddleware')
+const { CorsMiddleware } = require('./CorsMiddleware')
+const { CheckAccessTokenMiddleware } = require('./CheckAccessTokenMiddleware')
+// const { SanitizeMiddleware } = require('./SanitizeMiddleware')
+const { QueryMiddleware } = require('./QueryMiddleware')
+// const { ContentTypeMiddleware } = require('./ContentTypeMiddleware')
 
-module.exports = {
-  authJwt,
-  verifySignUp
-};
+module.exports = [
+  // InitMiddleware,
+  CorsMiddleware,
+  CheckAccessTokenMiddleware,
+//   SanitizeMiddleware,
+  QueryMiddleware,
+//   ContentTypeMiddleware
+]

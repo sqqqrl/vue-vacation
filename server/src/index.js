@@ -3,11 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const config = require('./config/config')
+const middlewares = require('./middlewares')
 const controllers = require('./controllers')
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: [`http://localhost:8080`, `https://localhost:8080`],
+  credentials: 'true',
+}))
 app.use(bodyParser.json())
 
 //db config
@@ -77,9 +81,12 @@ function initial() {
   });
 }
 
+for (const middleware of middlewares.map(Middleware => new Middleware())) {
+  app.use(middleware.handler())
+}
+
 
 for (const controller of controllers.map(Controller => new Controller())) {
-  console.log(controller);
   app.use(controller.router)
 }
 

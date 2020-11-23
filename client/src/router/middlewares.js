@@ -7,7 +7,6 @@ import { AuthService } from '@/services/auth.service'
  */
 export async function initCurrentUserStateMiddleware (to, from, next) {
   const currentUserId = $store.state.user.currentUser.id
-
   if (AuthService.hasRefreshToken() && !currentUserId) {
     try {
       await AuthService.debounceRefreshTokens()

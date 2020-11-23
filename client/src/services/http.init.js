@@ -26,7 +26,6 @@ export class Http {
               return request
             }).catch(error => Promise.reject(error))
         } else {
-          console.log('req', request);
           return request
         }
       }, error => {

@@ -4,10 +4,11 @@ const { BaseAction } = require('../../../rootcommon/BaseAction')
 
 class GetCurrentUserAction extends BaseAction {
   static async run (ctx) {
-    const { currentUser } = ServiceUIFrameContext
+    const { currentUser } = ctx
     try {
-      const res = await UserDAO.getCurrentUser(ctx);
-      console.log(res);
+      const data = await UserDAO.getCurrentUser(currentUser.id);
+
+      return this.result({ data })
     } catch (error) {
       console.log(error);
     }

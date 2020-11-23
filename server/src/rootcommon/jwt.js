@@ -6,6 +6,7 @@ function jwtVerify (token, SECRET) {
       if (error) {
         return reject({message: error.message })
       }
+
       return resolve(decoded)
     })
   })

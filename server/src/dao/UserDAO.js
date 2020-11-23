@@ -15,7 +15,9 @@ class UserDAO  {
   }
 
   static async getCurrentUser (id) {
-    console.log(id);
+    const user = await UserModel.findById(id);
+
+    return user;
   }
 }
 

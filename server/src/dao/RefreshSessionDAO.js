@@ -8,8 +8,7 @@ class RefreshSessionDAO extends BaseDAO {
 
   static async getByRefreshToken (refreshToken) {
     const result = await RefreshSessionModel.findOne({ refreshToken: refreshToken })
-    console.log(result);
-    // return result
+    return result
   }
 }
 

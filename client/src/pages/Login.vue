@@ -37,7 +37,7 @@ export default {
       try {
         await AuthService.makeLogin({ email: this.email, password: this.password })
         this.error = ''
-        // await this.$store.dispatch('user/getCurrent')
+        await this.$store.dispatch('user/getCurrent')
         // await this.$router.push('profile')
       } catch (error) {
         this.error = error.status === 404 ? 'User with same email not found' : error.message

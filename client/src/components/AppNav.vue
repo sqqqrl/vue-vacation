@@ -3,29 +3,8 @@
     <router-link to="/">
       Home
     </router-link>
-
-    <template v-if="user">
-      <router-link to="dashboard">
-        Dashboard
-      </router-link>
-
-      <router-link to="vacation">
-        Vacation
-      </router-link>
-
-      <router-link v-if="user.roles.includes('ROLE_ADMIN')" to="users">
-        Users
-      </router-link>
-
-      <span class="nav-welcome">Hello, {{ user.username }}.</span>
-
-      <button type="button" class="logoutButton" @click="logout">
-        Log out
-      </button>
-    </template>
-
-    <template v-else>
-      <router-link to="authenticate" class="button">
+    <template>
+      <router-link to="login" class="button">
         Login
       </router-link>
     </template>
@@ -34,16 +13,16 @@
 
 <script>
 export default {
-  computed: {
-    user: function () {
-      return this.$store.state.user
-    }
-  },
-  methods: {
-    logout () {
-      this.$store.dispatch('logout')
-    }
-  }
+  // computed: {
+  //   user: function () {
+  //     return this.$store.state.user
+  //   }
+  // },
+  // methods: {
+  //   logout () {
+  //     this.$store.dispatch('logout')
+  //   }
+  // }
 }
 </script>
 

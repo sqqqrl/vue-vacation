@@ -12,7 +12,7 @@ const router = new Router({
   routes
 })
 
-// router.beforeEach(initCurrentUserStateMiddleware)
+router.beforeEach(initCurrentUserStateMiddleware)
 // router.beforeEach(checkAccessMiddleware)
 // router.beforeEach(setPageTitleMiddleware)
 

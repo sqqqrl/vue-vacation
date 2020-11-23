@@ -7,6 +7,7 @@ const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { RefreshSessionEntity } = require('../common/RefreshSessionEntity')
 const { addRefreshSession } = require('../common/addRefreshSession')
 const config = require('../../../config')
+const { lchown } = require('fs')
 
 class LoginAction extends BaseAction {
   static get accessTag () {
@@ -49,7 +50,6 @@ class LoginAction extends BaseAction {
 
     
     await addRefreshSession(newRefreshSession)
-
     return this.result({
       data: {
         accessToken: await makeAccessToken(user),

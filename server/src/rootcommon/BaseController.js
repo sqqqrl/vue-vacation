@@ -18,7 +18,7 @@ class BaseController {
 
       try {
         const response = await action.run(ctx)
-
+        
         return res.status(response.status).json({
           data: response.data
         })
