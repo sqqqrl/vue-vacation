@@ -11,6 +11,11 @@ class AuthController extends BaseController {
         
         return router
     }
+
+    
+    async init () {
+        this.logger.debug(`${this.constructor.name} initialized...`)
+    }
 }
 
 module.exports = { AuthController }

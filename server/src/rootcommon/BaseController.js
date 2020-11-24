@@ -1,4 +1,11 @@
 class BaseController {
+  constructor ({ logger } = {}) {
+    if (!this.init) throw new Error(`${this.constructor.name} should implement 'init' method.`)
+    if (!this.router) throw new Error(`${this.constructor.name} should implement 'router' getter.`)
+
+    this.logger = logger
+  }
+
   actionRunner (action) {
     return async (req, res, next) => {
       const ctx = {

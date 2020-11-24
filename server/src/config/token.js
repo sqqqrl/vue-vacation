@@ -1,5 +1,6 @@
 const { BaseConfig } = require('../rootcommon/BaseConfig')
 const expiresInRegexp = /^(\d\d?m$|\d\d?h$|\d\d?d$)/
+const logger = require('../logger')
 
 class TokenConfig extends BaseConfig {
   constructor () {
@@ -24,6 +25,10 @@ class TokenConfig extends BaseConfig {
       expiresIn: this.set('TOKEN_REFRESH_EXP', this.joi.string().regex(expiresInRegexp).required())
     }
     
+  }
+
+  async init () {
+    logger.debug(`${this.constructor.name}: Initialization finish...`)
   }
 }
 
