@@ -2,11 +2,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
-import axios from 'axios';
-import AsyncComputed from 'vue-async-computed'
-import './mixins'
+import AsyncComputed from "vue-async-computed";
+import "./mixins";
 
-Vue.use(AsyncComputed)
+Vue.use(AsyncComputed);
 
 Vue.config.productionTip = false;
 

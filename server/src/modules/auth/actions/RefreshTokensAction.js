@@ -17,7 +17,6 @@ class RefreshTokensAction extends BaseAction {
     console.log(ctx);
     // take refresh token from any possible source
     const reqRefreshToken = ctx.cookies.refreshToken || ctx.body.refreshToken
-    console.log(reqRefreshToken);
 
     if (!reqRefreshToken) {
       throw new AppError({ ...errorCodes.VALIDATION, message: 'Refresh token not provided' })

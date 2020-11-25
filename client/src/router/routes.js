@@ -3,17 +3,17 @@
 // import profilePostsPage from '../pages/profile/ProfilePostsPage.vue'
 
 // single pages
-import homePage from '../views/Home.vue'
-import loginPage from '../pages/Login.vue'
-import notFoundPage from '../pages/NotFound.vue'
+import homePage from "../views/Home.vue";
+import loginPage from "../pages/Login.vue";
+import notFoundPage from "../pages/NotFound.vue";
 
 // import { routePropResolver } from './util'
-import { DOMAIN_TITLE } from '../.env'
+import { DOMAIN_TITLE } from "../.env";
 
 export const routes = [
   {
-    path: '/',
-    name: 'index',
+    path: "/",
+    name: "index",
     component: homePage,
     meta: { title: `${DOMAIN_TITLE} | home` }
   },
@@ -37,14 +37,14 @@ export const routes = [
   //   ]
   // },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: loginPage,
     meta: { title: `${DOMAIN_TITLE} | login` }
   },
   {
-    path: '*',
+    path: "*",
     component: notFoundPage,
     meta: { title: `${DOMAIN_TITLE} | not found` }
   }
-]
+];

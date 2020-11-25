@@ -1,5 +1,5 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import currentUser from '../mixins/currentUser'
+import currentUser from "../mixins/currentUser";
 
-Vue.mixin(currentUser)
+Vue.mixin(currentUser);

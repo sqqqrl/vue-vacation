@@ -19,7 +19,9 @@
 <script>
 export default {
   methods: {
-    isNew (isNewUser) { this.$store.dispatch('isNewUser', !isNewUser) }
+    isNew(isNewUser) {
+      this.$store.dispatch("isNewUser", !isNewUser);
+    }
   }
-}
+};
 </script>

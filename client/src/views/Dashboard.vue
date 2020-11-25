@@ -8,18 +8,18 @@
 </template>
 
 <script>
-import axios from 'axios'
-import EventCard from '../components/EventCard'
+import axios from "axios";
+import EventCard from "../components/EventCard";
 
 export default {
   components: { EventCard },
-  data () {
-    return { events: 'Loading events...' }
+  data() {
+    return { events: "Loading events..." };
   },
-  created () {
-    axios.get('//localhost:3000/dashboard').then(({ data }) => {
-      this.events = data.events.events
-    })
+  created() {
+    axios.get("//localhost:3000/dashboard").then(({ data }) => {
+      this.events = data.events.events;
+    });
   }
-}
+};
 </script>

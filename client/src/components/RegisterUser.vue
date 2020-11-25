@@ -4,16 +4,16 @@
       <label for="name">
         Name:
       </label>
-      <input v-model="username" type="text" name="name" value>
+      <input v-model="username" type="text" name="name" value />
       <label for="email">
         Email:
       </label>
-      <input v-model="email" type="email" name="email" value>
+      <input v-model="email" type="email" name="email" value />
 
       <label for="password">
         Password:
       </label>
-      <input v-model="password" type="password" name value>
+      <input v-model="password" type="password" name value />
       <p v-if="error">
         {{ error }}
       </p>
@@ -27,26 +27,26 @@
 
 <script>
 export default {
-  name: 'RegisterUser',
-  data () {
+  name: "RegisterUser",
+  data() {
     return {
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
       error: null
-    }
+    };
   },
   methods: {
-    register () {
+    register() {
       this.$store
-        .dispatch('register', {
+        .dispatch("register", {
           username: this.username,
           email: this.email,
           password: this.password
         })
-        .then(() => this.$store.dispatch('isNewUser', true))
-        .catch(err => this.error = err.response.data.message)
+        .then(() => this.$store.dispatch("isNewUser", true))
+        .catch(err => (this.error = err.response.data.message));
     }
   }
-}
+};
 </script>
