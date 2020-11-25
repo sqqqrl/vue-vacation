@@ -1,23 +1,22 @@
 const { BaseDAO } = require('./BaseDAO')
 const UserModel = require('../models/UserModel')
 
-class UserDAO  {
-  static get model () {
-    return UserModel
-  }
-  // static query
-
+class UserDAO extends BaseDAO {
   static async getByEmail (email) {
-    const user = await UserModel.findOne({ email: email });
+    const data = await UserModel.findOne({ email: email });
+    if (!data) throw this.errorEmptyResponse();
 
-    // TODO: CATCH ERROR AND SEND 
-    return user
+    return data;
   }
 
   static async getCurrentUser (id) {
-    const user = await UserModel.findById(id);
+    let data = (await UserModel.findById(id)).toObject();
 
-    return user;
+    if (!data) throw this.errorEmptyResponse();
+    // delete sensitive data from current user
+    delete data.password;
+    
+    return data;
   }
 }
 

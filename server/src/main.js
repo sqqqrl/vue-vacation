@@ -35,21 +35,12 @@ config.rootInit().then(() => {
       logger
     })
   })
+  .then(() => {
+    logger.debug('---------')
+    logger.debug(`Server listened at ${config.app.host}:${config.app.port}`)
+    logger.debug('---------')
+  })
   .catch(err => {
-    logger.error('failed db connect', {reason: err.message})
+    logger.error('Failed to connect db', {reason: err.message})
     process.exit(1);
   })
-// mongodb init
-// db.mongoose
-//   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.dbname}`, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-//   })
-//   .then( async () => {
-//     console.log("Successfully connect to MongoDB.");
-//     initial();
-//   })
-//   .catch(err => {
-//     console.error("Connection error", err);
-//     process.exit();
-//   })

@@ -1,13 +1,14 @@
 const ms = require('ms')
 
 const { UserDAO } = require('../../../dao/UserDAO')
+const { CookieEntity } = require('../../../core/index')
 const { checkPassword } = require('../../../rootcommon/checkPassword')
 const { makeAccessToken } = require('../common/makeAccessToken')
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { RefreshSessionEntity } = require('../common/RefreshSessionEntity')
 const { addRefreshSession } = require('../common/addRefreshSession')
 const config = require('../../../config')
-const { lchown } = require('fs')
+// const { lchown } = require('fs')
 
 class LoginAction extends BaseAction {
   static get accessTag () {
@@ -48,14 +49,23 @@ class LoginAction extends BaseAction {
       expiresIn: refTokenExpiresInMilliseconds
     })
 
-    
     await addRefreshSession(newRefreshSession)
+
     return this.result({
       data: {
         accessToken: await makeAccessToken(user),
         refreshToken: newRefreshSession.refreshToken
       },
-      cookies: []
+      cookies: [
+        new CookieEntity({
+          name: 'refreshToken',
+          value: newRefreshSession.refreshToken,
+          domain: 'localhost',
+          path: '/auth',
+          maxAge: refTokenExpiresInSeconds,
+          secure: false // temp: should be deleted
+        })
+      ]
     })
   }
 }

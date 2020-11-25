@@ -5,6 +5,7 @@ const { SentryCatch } = require('./lib/SentryCatch')
 const { Server } = require('./lib/Server')
 const { Logger } = require('./lib/Logger')
 const { MongoDB } = require('./lib/MongoDB')
+const { CookieEntity } = require('./lib/CookieEntity')
 
 module.exports = {
   ValidatorNano,
@@ -14,5 +15,6 @@ module.exports = {
   SentryCatch,
   Server,
   Logger,
-  MongoDB
+  MongoDB,
+  CookieEntity
 }

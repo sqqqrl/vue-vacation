@@ -24,9 +24,28 @@ class BaseController {
       }
 
       try {
-        const response = await action.run(ctx)
-        
+
+        /**
+         * fire action
+         */
+        const response = await action.run(ctx);
+
+        /**
+         * set headers
+         */
+        if (response.headers) res.set(response.headers);
+
+        /**
+         * set cookie
+         */
+        if (response.cookies && response.cookies.length) {
+          for (const cookie of response.cookies) {
+            res.cookie(cookie.name, cookie.value, cookie.options)
+          }
+        }
+
         return res.status(response.status).json({
+          success: response.success,
           data: response.data
         })
       } catch (error) {

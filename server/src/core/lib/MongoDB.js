@@ -1,4 +1,3 @@
-const { response } = require('express');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
@@ -22,11 +21,10 @@ function start ({ host, port, dbname, logger }) {
       return resolve()
     });
 
-    mongoose.connection.on('error', (err) => {
+    mongoose.connection.on('error', ( err ) => {
       return reject(err)
     })
   })
-  
 }
 
 

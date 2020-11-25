@@ -1,6 +1,10 @@
 const { AppError, errorCodes } = require('../validator')
 
 class BaseDAO {
+  static errorEmptyResponse () {
+    return new AppError({ ...errorCodes.NOT_FOUND, layer: 'DAO' })
+  }
+
   static createModel (entity) {
     return new this.model({...entity})
   }
