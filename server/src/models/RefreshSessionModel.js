@@ -8,6 +8,7 @@ const RefreshSessionModel = mongoose.model(
       ref: "User"
     },
     refreshToken: String,
+    fingerprint: String,
     ua: String,
     ip: String,
     expiresIn: Number

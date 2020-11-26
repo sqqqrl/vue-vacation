@@ -2,6 +2,10 @@ const { BaseDAO } = require('./BaseDAO')
 const UserModel = require('../models/UserModel')
 
 class UserDAO extends BaseDAO {
+  static get model () {
+    return UserModel
+  }
+
   static async getByEmail (email) {
     const data = await UserModel.findOne({ email: email });
     if (!data) throw this.errorEmptyResponse();

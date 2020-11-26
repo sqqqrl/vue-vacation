@@ -20,8 +20,13 @@ class BaseDAO {
     return result
   }
 
-  static async baseRemoveWhere (where = {}) {
-    return this.model.deleteMany(where)
+  static async baseRemoveWhere (where) {
+    return this.model.deleteOne(where)
+  }
+
+  static async baseGetById (id) {
+    const result = await this.model.findById(id)
+    return result
   }
 }
 

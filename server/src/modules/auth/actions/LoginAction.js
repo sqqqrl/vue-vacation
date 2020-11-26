@@ -41,6 +41,7 @@ class LoginAction extends BaseAction {
       throw new Error({ description: 'Invalid credentials', status: 403, code: 'INVALID_CREDENTIALS_ERROR' })
     }
 
+
     const newRefreshSession = new RefreshSessionEntity({
       userId: user.id,
       ip: ctx.ip,
@@ -48,6 +49,11 @@ class LoginAction extends BaseAction {
       fingerprint: ctx.body.fingerprint,
       expiresIn: refTokenExpiresInMilliseconds
     })
+
+    
+    console.log('------------------------------------------------------');
+    console.log(newRefreshSession);
+    console.log('------------------------------------------------------');
 
     await addRefreshSession(newRefreshSession)
 

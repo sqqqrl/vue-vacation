@@ -30,7 +30,7 @@ function start ({ port, host, controllers, middlewares, cookieSecret, reqLimit, 
     app.use(express.json({ limit: reqLimit }))
     app.use(express.urlencoded({ extended: false, limit: reqLimit }))
     app.use(cookieParser(cookieSecret))
-    app.use(express.static(path.join(__dirname, 'public')))
+    // app.use(express.static(path.join(__dirname, 'public')))
 
     /**
      * middlewares initialization

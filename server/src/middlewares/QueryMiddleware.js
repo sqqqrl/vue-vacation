@@ -1,7 +1,6 @@
 class QueryMiddleware {
   handler () {
     return async (req, res, next) => {
-      console.log(req.query);
       // set default query
       req.query = req.method === 'GET' ? {
         ...req.query,

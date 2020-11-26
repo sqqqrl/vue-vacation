@@ -4,8 +4,11 @@ const { AppError, errorCodes } = require('../../../validator')
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { addRefreshSession } = require('../common/addRefreshSession')
 const { makeAccessToken } = require('../common/makeAccessToken')
+const { verifyRefreshSession } = require('../common/verifyRefreshSession')
+const { RefreshSessionEntity } = require('../common/RefreshSessionEntity')
 const { UserDAO } = require('../../../dao/UserDAO')
 const { RefreshSessionDAO } = require('../../../dao/RefreshSessionDAO')
+const { CookieEntity } = require('../../../core')
 const config = require('../../../config')
 
 class RefreshTokensAction extends BaseAction {
@@ -14,9 +17,9 @@ class RefreshTokensAction extends BaseAction {
   }
 
   static async run (ctx) {
-    console.log(ctx);
     // take refresh token from any possible source
     const reqRefreshToken = ctx.cookies.refreshToken || ctx.body.refreshToken
+    const reqFingerprint = ctx.body.fingerprint
 
     if (!reqRefreshToken) {
       throw new AppError({ ...errorCodes.VALIDATION, message: 'Refresh token not provided' })
@@ -24,11 +27,12 @@ class RefreshTokensAction extends BaseAction {
 
     const refTokenExpiresInMilliseconds = new Date().getTime() + ms(config.token.refresh.expiresIn)
     const refTokenExpiresInSeconds = parseInt(refTokenExpiresInMilliseconds / 1000)
-
     const oldRefreshSession = await RefreshSessionDAO.getByRefreshToken(reqRefreshToken)
     await RefreshSessionDAO.baseRemoveWhere({ refreshToken: reqRefreshToken })
     await verifyRefreshSession(new RefreshSessionEntity(oldRefreshSession), reqFingerprint)
     const user = await UserDAO.baseGetById(oldRefreshSession.userId)
+
+
 
     const newRefreshSession = new RefreshSessionEntity({
       userId: user.id,

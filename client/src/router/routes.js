@@ -37,7 +37,7 @@ export const routes = [
   //   ]
   // },
   {
-    path: "/login",
+    path: "/auth",
     name: "login",
     component: loginPage,
     meta: { title: `${DOMAIN_TITLE} | login` }
