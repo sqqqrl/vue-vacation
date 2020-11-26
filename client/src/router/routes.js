@@ -1,5 +1,5 @@
 // profile
-// import profilePage from '../pages/profile/ProfilePage.vue'
+import profilePage from '../pages/profile/Profile.vue'
 // import profilePostsPage from '../pages/profile/ProfilePostsPage.vue'
 
 // single pages
@@ -24,18 +24,18 @@ export const routes = [
   //   meta: { title: `${DOMAIN_TITLE} | news` },
   //   props: routePropResolver
   // },
-  // {
-  //   path: '/profile',
-  //   component: profilePage,
-  //   meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
-  //   children: [
-  //     {
-  //       path: '',
-  //       name: 'profile',
-  //       component: profilePostsPage
-  //     }
-  //   ]
-  // },
+  {
+    path: '/profile',
+    component: profilePage,
+    meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
+    // children: [
+    //   {
+    //     path: '',
+    //     name: 'profile',
+    //     component: profilePostsPage
+    //   }
+    // ]
+  },
   {
     path: "/auth",
     name: "login",

@@ -27,6 +27,7 @@ class RefreshTokensAction extends BaseAction {
 
     const refTokenExpiresInMilliseconds = new Date().getTime() + ms(config.token.refresh.expiresIn)
     const refTokenExpiresInSeconds = parseInt(refTokenExpiresInMilliseconds / 1000)
+
     const oldRefreshSession = await RefreshSessionDAO.getByRefreshToken(reqRefreshToken)
     await RefreshSessionDAO.baseRemoveWhere({ refreshToken: reqRefreshToken })
     await verifyRefreshSession(new RefreshSessionEntity(oldRefreshSession), reqFingerprint)
