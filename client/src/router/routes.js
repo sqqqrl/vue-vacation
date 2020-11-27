@@ -1,14 +1,4 @@
-// // profile
-// import profilePage from '../pages/profile/Profile.vue'
-// // import profilePostsPage from '../pages/profile/ProfilePostsPage.vue'
-
-// // single pages
-// import homePage from "../views/Home.vue";
-// import loginPage from "../pages/Login.vue";
-// import notFoundPage from "../pages/NotFound.vue";
-
-// // import { routePropResolver } from './util'
-// import { DOMAIN_TITLE } from "../.env";
+import loginPage from "../pages/Login.vue";
 
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
@@ -30,6 +20,11 @@ export const routes = [
         path: "user",
         name: "User Profile",
         component: UserProfile
+      },
+      {
+        path: "auth",
+        name: "Login",
+        component: loginPage
       },
     ]
   }
