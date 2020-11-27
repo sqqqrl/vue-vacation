@@ -8,7 +8,8 @@ Vue.use(Router);
 
 const router = new Router({
   linkActiveClass: "is-active",
-  mode: "history",
+  linkExactActiveClass: "nav-item active",
+  // mode: "history",
   routes
 });
 

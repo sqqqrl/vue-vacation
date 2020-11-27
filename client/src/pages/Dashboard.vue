@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div class="content">
+    fsdfsdfsdfdf
+  </div>
 </template>
 
 <script>
