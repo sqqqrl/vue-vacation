@@ -46,7 +46,7 @@ export class AuthService {
         , { withCredentials: true }
       );
       _resetAuthData();
-      $router.push({ name: "auth" }).catch(() => {});
+      $router.push({ name: "Login" }).catch(() => {});
       return new ResponseWrapper(response, response.data.data);
     } catch (error) {
       throw new ErrorWrapper(error);
@@ -69,7 +69,7 @@ export class AuthService {
     } catch (error) {
       console.log(error.response.data.code);
       _resetAuthData();
-      $router.push({ name: "login" }).catch(() => {});
+      $router.push({ name: "auth" }).catch(() => {});
       throw new ErrorWrapper(error);
     }
   }

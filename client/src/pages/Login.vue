@@ -40,7 +40,7 @@ export default {
         });
         this.error = "";
         await this.$store.dispatch("user/getCurrent");
-        await this.$router.push('profile')
+        await this.$router.push('dashboard')
       } catch (error) {
         this.error =
           error.status === 404

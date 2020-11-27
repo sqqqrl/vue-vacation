@@ -7,7 +7,7 @@
       :sidebar-background-image="sidebarBackgroundImage"
     >
       <!-- <mobile-menu slot="content"></mobile-menu> -->
-      <template v-if="$currentUser">
+      <template v-if="$currentUser._id">
         <sidebar-link to="dashboard">
           <md-icon>dashboard</md-icon>
           <p>Dashboard</p>
