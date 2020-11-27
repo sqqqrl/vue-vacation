@@ -43,10 +43,10 @@ export class AuthService {
       const response = await new Http({ auth: true }).post(
         "auth/logout",
         {}
-        // , { withCredentials: true }
+        , { withCredentials: true }
       );
       _resetAuthData();
-      $router.push({ name: "login" }).catch(() => {});
+      $router.push({ name: "auth" }).catch(() => {});
       return new ResponseWrapper(response, response.data.data);
     } catch (error) {
       throw new ErrorWrapper(error);
