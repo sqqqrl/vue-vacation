@@ -50,11 +50,6 @@ class LoginAction extends BaseAction {
       expiresIn: refTokenExpiresInMilliseconds
     })
 
-    
-    console.log('------------------------------------------------------');
-    console.log(newRefreshSession);
-    console.log('------------------------------------------------------');
-
     await addRefreshSession(newRefreshSession)
 
     return this.result({

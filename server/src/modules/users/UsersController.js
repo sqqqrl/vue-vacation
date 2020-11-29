@@ -7,6 +7,8 @@ class UsersController extends BaseController {
   get router () {
     router.get('/users/current', this.actionRunner(actions.GetCurrentUserAction))
 
+    router.post('/users/create', this.actionRunner(actions.CreateUserAction))
+
     return router
   }
 
