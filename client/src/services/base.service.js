@@ -21,4 +21,14 @@ export class BaseService {
       encode: false
     });
   }
+
+  static async create(data) {
+    try {
+      console.log(this.entity);
+      const response = await this.request({ auth: true }).post(`${this.entity}/create`, data);
+      return new ResponseWrapper(response, response.data.data);
+    } catch (error) {
+      throw new ErrorWrapper(error);
+    }
+  }
 }

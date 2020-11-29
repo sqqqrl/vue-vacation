@@ -22,11 +22,15 @@ export class AuthService {
   static async makeLogin({ email, password }) {
     try {
       const fingerprint = await _getFingerprint();
-      const response = await axios.post(`${API_URL}/auth/login`, {
-        email,
-        password,
-        fingerprint
-      }, { withCredentials: true });
+      const response = await axios.post(
+        `${API_URL}/auth/login`,
+        {
+          email,
+          password,
+          fingerprint
+        },
+        { withCredentials: true }
+      );
 
       _setAuthData({
         accessToken: response.data.data.accessToken,
@@ -42,8 +46,8 @@ export class AuthService {
     try {
       const response = await new Http({ auth: true }).post(
         "auth/logout",
-        {}
-        , { withCredentials: true }
+        {},
+        { withCredentials: true }
       );
       _resetAuthData();
       $router.push({ name: "Login" }).catch(() => {});
@@ -59,7 +63,9 @@ export class AuthService {
         `${API_URL}/auth/refresh-tokens`,
         {
           fingerprint: await _getFingerprint()
-        }, { withCredentials: true });
+        },
+        { withCredentials: true }
+      );
 
       _setAuthData({
         accessToken: response.data.data.accessToken,

@@ -12,11 +12,7 @@
         </div>
       </a>
 
-      <a
-        href="#"
-        target="_blank"
-        class="simple-text logo-normal"
-      >
+      <a href="#" target="_blank" class="simple-text logo-normal">
         {{ title }}
       </a>
     </div>

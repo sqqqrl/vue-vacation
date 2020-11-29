@@ -1,4 +1,5 @@
 import loginPage from "../pages/Login.vue";
+import registerPage from "../pages/Register.vue";
 
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
@@ -26,6 +27,11 @@ export const routes = [
         name: "Login",
         component: loginPage
       },
+      {
+        path: "register",
+        name: "Sign up",
+        component: registerPage
+      }
     ]
   }
   // {
@@ -45,13 +51,13 @@ export const routes = [
   //   path: '/profile',
   //   component: profilePage,
   //   meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
-    // children: [
-    //   {
-    //     path: '',
-    //     name: 'profile',
-    //     component: profilePostsPage
-    //   }
-    // ]
+  // children: [
+  //   {
+  //     path: '',
+  //     name: 'profile',
+  //     component: profilePostsPage
+  //   }
+  // ]
   // },
   // {
   //   path: "/auth",

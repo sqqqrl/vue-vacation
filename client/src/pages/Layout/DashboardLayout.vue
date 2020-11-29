@@ -20,14 +20,18 @@
           Logout
         </md-button>
       </template>
-      
+
       <template v-else>
         <sidebar-link to="auth">
           <md-icon>person</md-icon>
-          <p>Login</p>
+          <p>Sing in</p>
+        </sidebar-link>
+
+        <sidebar-link to="register">
+          <md-icon>person</md-icon>
+          <p>Sign up</p>
         </sidebar-link>
       </template>
-
     </side-bar>
 
     <div class="main-panel">
@@ -42,7 +46,7 @@
 import TopNavbar from "./TopNavbar.vue";
 import DashboardContent from "./Content.vue";
 
-import { AuthService } from '@/services/auth.service'
+import { AuthService } from "@/services/auth.service";
 
 export default {
   components: {
@@ -59,14 +63,14 @@ export default {
 
   methods: {
     async logout() {
-      await AuthService.makeLogout()
+      await AuthService.makeLogout();
     }
   }
 };
 </script>
 
 <style lang="scss">
-  .md-button.logout {
-    margin: 10px 15px;
-  }
+.md-button.logout {
+  margin: 10px 15px;
+}
 </style>
