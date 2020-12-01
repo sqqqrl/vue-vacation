@@ -43,9 +43,9 @@ class BaseController {
             res.cookie(cookie.name, cookie.value, cookie.options)
           }
         }
-
         return res.status(response.status).json({
           success: response.success,
+          message: response.message,
           data: response.data
         })
       } catch (error) {

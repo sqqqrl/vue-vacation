@@ -1,5 +1,6 @@
 const ms = require('ms')
 
+const { AppError, errorCodes } = require('../../../validator')
 const { UserDAO } = require('../../../dao/UserDAO')
 const { CookieEntity } = require('../../../core/index')
 const { checkPassword } = require('../../../rootcommon/checkPassword')
@@ -27,8 +28,6 @@ class LoginAction extends BaseAction {
   //   }
   // }
 
-
-
   static async run (ctx) {
     let user = {}
     const refTokenExpiresInMilliseconds = new Date().getTime() + ms(config.token.refresh.expiresIn)
@@ -37,10 +36,12 @@ class LoginAction extends BaseAction {
     try {
       user = await UserDAO.getByEmail(ctx.body.email);
       await checkPassword(ctx.body.password, user.password);
-    } catch (error) {
-      throw new Error({ description: 'Invalid credentials', status: 403, code: 'INVALID_CREDENTIALS_ERROR' })
+    } catch (e) {
+      if ([errorCodes.NOT_FOUND.code, errorCodes.INVALID_PASSWORD.code].includes(e.code)) {
+        throw new AppError({ ...errorCodes.INVALID_CREDENTIALS })
+      }
+      throw e
     }
-
 
     const newRefreshSession = new RefreshSessionEntity({
       userId: user.id,

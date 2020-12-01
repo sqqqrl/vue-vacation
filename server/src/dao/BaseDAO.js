@@ -5,14 +5,23 @@ class BaseDAO {
     return new AppError({ ...errorCodes.NOT_FOUND, layer: 'DAO' })
   }
 
+  static clearSensativeData (data) {
+    const result = {...data}._doc
+
+    delete result.password
+
+    return result
+  }
+
   static createModel (entity) {
     return new this.model({...entity})
   }
 
-  static async baseCreate (entity = {}) {
-    return this.createModel(entity).save(err => {
-      console.log(err);
-    })
+  static baseCreate (entity = {}) {
+    return this
+      .createModel(entity)
+      .save()
+      .then(doc => this.clearSensativeData(doc))
   }
 
   static async baseGetCount (filter = {}) {

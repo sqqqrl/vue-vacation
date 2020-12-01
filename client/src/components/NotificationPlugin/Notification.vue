@@ -46,6 +46,10 @@ export default {
     timestamp: {
       type: Date,
       default: () => new Date()
+    },
+    afterClose: {
+      type: Function,
+      default: null
     }
   },
   data() {
@@ -83,6 +87,11 @@ export default {
   methods: {
     close() {
       this.$emit("on-close", this.timestamp);
+
+      if (this.afterClose !== null && this.afterClose !== undefined) {
+        this.afterClose()
+      }
+
     }
   },
   mounted() {

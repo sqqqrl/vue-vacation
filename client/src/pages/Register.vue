@@ -28,6 +28,9 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
+                {{ error }}
+              </div>
+              <div class="md-layout-item md-size-100 text-center">
                 <md-button class="md-raised md-success" @click="register"
                   >Register</md-button
                 >
@@ -41,7 +44,7 @@
 </template>
 
 <script>
-import { UsersService } from "@/services/users.service"
+import { UsersService } from "@/services/users.service";
 
 export default {
   name: "LoginUser",
@@ -60,18 +63,33 @@ export default {
         username: this.username,
         email: this.email,
         password: this.password
-      }
+      };
 
       try {
         await UsersService.create(data);
         this.error = "";
+        this.notifyVue({
+          verticalAlign: "center",
+          horizontalAlign: "center",
+          msg: "Account has been created"
+        });
       } catch (error) {
-        this.error =
-          error.status === 404
-            ? "Bad request"
-            : error.message;
+        console.log(error.message);
+        this.error = error.status === 404 ? "Bad request" : error.message;
       }
+    },
 
+    notifyVue({ verticalAlign, horizontalAlign, msg }) {
+      this.$notify({
+        message: msg,
+        icon: "add_alert",  
+        horizontalAlign: horizontalAlign,
+        verticalAlign: verticalAlign,
+        type: "info",
+        afterClose: async () => {
+          await this.$router.push("auth");
+        }
+      });
     }
   }
 };
