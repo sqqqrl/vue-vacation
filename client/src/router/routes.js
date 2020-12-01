@@ -20,6 +20,7 @@ export const routes = [
       {
         path: "user",
         name: "User Profile",
+        meta: { isAuth: true },
         component: UserProfile
       },
       {
