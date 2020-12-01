@@ -75,7 +75,7 @@ export class AuthService {
     } catch (error) {
       console.log(error.response.data.code);
       _resetAuthData();
-      $router.push({ name: "auth" }).catch(() => {});
+      $router.push({ name: "Login" }).catch(() => {});
       throw new ErrorWrapper(error);
     }
   }
