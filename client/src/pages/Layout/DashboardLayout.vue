@@ -16,9 +16,20 @@
           <md-icon>person</md-icon>
           <p>User Profile</p>
         </sidebar-link>
-        <md-button class="logout" @click="logout">
-          Logout
-        </md-button>
+        <li class="md-list-item">
+          <div id="logout" class="md-list-item-router md-list-item-container md-button-clean" @click="logout">
+            <div class="md-list-item-content">
+              <md-icon>logout</md-icon>
+              <p>Logout</p>
+            </div>
+          </div>
+        </li>
+        <!-- <li class="md-list-item">
+          <a href="#" class="md-list-item-router md-list-item-container md-button-clean nav-item">
+            <div class="md-list-item-content md-ripple">
+            </div>
+          </a>
+        </li> -->
       </template>
 
       <template v-else>
@@ -70,7 +81,23 @@ export default {
 </script>
 
 <style lang="scss">
-.md-button.logout {
-  margin: 10px 15px;
+// .md-button {
+//   margin: 10px 15px;
+// }
+
+// .md-button.logout {
+// }
+
+#logout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  margin: 10px 15px 0;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  white-space: nowrap;
+  cursor: pointer;
+  width: auto;
 }
 </style>
