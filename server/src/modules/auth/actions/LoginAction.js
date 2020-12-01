@@ -38,9 +38,9 @@ class LoginAction extends BaseAction {
       await checkPassword(ctx.body.password, user.password);
     } catch (e) {
       if ([errorCodes.NOT_FOUND.code, errorCodes.INVALID_PASSWORD.code].includes(e.code)) {
-        throw new AppError({ ...errorCodes.INVALID_CREDENTIALS })
+        return new AppError({ ...errorCodes.INVALID_CREDENTIALS })
       }
-      throw e
+      return e
     }
 
     const newRefreshSession = new RefreshSessionEntity({

@@ -9,7 +9,7 @@ class CreateUserAction extends BaseAction {
 
     const { available } = await UserDAO.checkEmailAvailability(ctx.body.email);
     if (!available) {
-      throw new AppError({ ...errorCodes.EMAIL_ALREADY_TAKEN })
+      return new AppError({ ...errorCodes.EMAIL_ALREADY_TAKEN })
     }
 
     const hash = await makePasswordHash(ctx.body.password)

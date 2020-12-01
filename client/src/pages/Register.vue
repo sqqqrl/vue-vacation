@@ -28,7 +28,7 @@
                 </md-field>
               </div>
               <div class="md-layout-item md-size-100 text-center">
-                {{ error }}
+                <span class="text-error">{{ error }}</span>
               </div>
               <div class="md-layout-item md-size-100 text-center">
                 <md-button class="md-raised md-success" @click="register"

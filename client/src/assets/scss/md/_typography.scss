@@ -71,6 +71,9 @@ h2.title{
 .text-info {
   color: $brand-info !important;
 }
-.text-gray{
-    color: $gray-color !important;
+.text-gray {
+  color: $gray-color !important;
+}
+.text-error {
+  color: red;
 }
