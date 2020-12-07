@@ -71,10 +71,28 @@ export default {
 
   methods: {
     async updateProfile() {
-      try {
-        const response = await UsersService.update(this.user);
+      try {        
+        const data = this.$_.pickBy(this.user, (el) => el !== null);
+        
+        for (let key in data) {
+          if (data[key] === this.$currentUser[key]) {
+            delete data[key]
+          }
+        }
+
+        const response = await UsersService.update(data);
         this.error = "";
-        console.log(response);
+        this.$notify({
+          message: "Profile has been updated",
+          icon: "add_alert",  
+          horizontalAlign: "center",
+          verticalAlign: "top",
+          type: "info",
+          afterClose: async () => {
+            await this.$router.push("/user");
+          }
+        });
+
       } catch (error) {
         console.log(error);
       }

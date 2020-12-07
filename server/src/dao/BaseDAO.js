@@ -24,6 +24,11 @@ class BaseDAO {
       .then(doc => this.clearSensativeData(doc))
   }
 
+  static baseUpdate (id, entity = {}) {
+    return this.model
+      .findByIdAndUpdate({ _id: id }, entity)
+  }
+
   static async baseGetCount (filter = {}) {
     const result = await this.model.countDocuments(filter)
     return result
