@@ -1,10 +1,12 @@
 import loginPage from "../pages/Login.vue";
 import registerPage from "../pages/Register.vue";
 
+
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
+import { EditProfileForm, UserCard } from "@/pages";
 
 export const routes = [
   {
@@ -18,10 +20,23 @@ export const routes = [
         component: Dashboard
       },
       {
-        path: "user",
+        path: "/user",
+        component: UserProfile,
         name: "User Profile",
+        redirect: { name: "View Profile"},
         meta: { isAuth: true },
-        component: UserProfile
+        children: [
+          {
+            path: "view",
+            name: "View Profile",
+            component: UserCard
+          },
+          {
+            path: "edit",
+            name: "Edit Profile",
+            component: EditProfileForm
+          }
+        ]
       },
       {
         path: "auth",

@@ -8,17 +8,17 @@
     >
       <!-- <mobile-menu slot="content"></mobile-menu> -->
       <template v-if="$currentUser._id">
-        <sidebar-link to="dashboard">
+        <sidebar-link to="/dashboard">
           <md-icon>dashboard</md-icon>
           <p>Dashboard</p>
         </sidebar-link>
-        <sidebar-link to="user">
+        <sidebar-link to="/user">
           <md-icon>person</md-icon>
           <p>User Profile</p>
         </sidebar-link>
         <li class="md-list-item">
           <div id="logout" class="md-list-item-router md-list-item-container md-button-clean" @click="logout">
-            <div class="md-list-item-content">
+            <div class="md-list-item-content md-ripple">
               <md-icon>logout</md-icon>
               <p>Logout</p>
             </div>
@@ -81,13 +81,6 @@ export default {
 </script>
 
 <style lang="scss">
-// .md-button {
-//   margin: 10px 15px;
-// }
-
-// .md-button.logout {
-// }
-
 #logout {
   display: -webkit-box;
   display: -ms-flexbox;

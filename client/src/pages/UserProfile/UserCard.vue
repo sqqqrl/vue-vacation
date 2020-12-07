@@ -5,14 +5,13 @@
     </div>
 
     <md-card-content>
-      <h6 class="category text-gray">CEO / Co-Founder</h6>
-      <h4 class="card-title">Alec Thompson</h4>
-      <p class="card-description">
-        Don't be scared of the truth because we need to restart the human
-        foundation in truth And I love you like Kanye loves Kanye I love Rick
-        Owens’ bed design but the back is...
-      </p>
-      <md-button class="md-round md-success">Follow</md-button>
+      <h4 class="card-title">{{ $currentUser.username }}</h4>
+      
+    <router-link
+      to="edit"
+    >
+      <md-button class="md-round md-success">Edit</md-button>
+    </router-link>
     </md-card-content>
   </md-card>
 </template>
