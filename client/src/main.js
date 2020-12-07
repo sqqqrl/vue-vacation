@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store/index";
 import AsyncComputed from "vue-async-computed";
 import "./mixins";
+import _ from "lodash"
 
 // Plugins
 import GlobalComponents from "./globalComponents";
@@ -22,6 +23,8 @@ Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 
 Vue.config.productionTip = false;
+
+Object.defineProperty(Vue.prototype, '$_', { value: _ });
 
 new Vue({
   router,

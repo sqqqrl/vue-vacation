@@ -33,4 +33,16 @@ export class BaseService {
       throw new ErrorWrapper(error);
     }
   }
+  
+  static async update(data) {
+    try {
+      const response = await this.request({ auth: true }).patch(
+        `${this.entity}`,
+        data
+      )
+      return new ResponseWrapper(response, response.data.data);
+    } catch (error) {
+      throw new ErrorWrapper(error);
+    }
+  }
 }

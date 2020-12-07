@@ -6,12 +6,12 @@
 
     <md-card-content>
       <h4 class="card-title">{{ $currentUser.username }}</h4>
-      
-    <router-link
-      to="edit"
-    >
-      <md-button class="md-round md-success">Edit</md-button>
-    </router-link>
+        
+      <router-link
+        to="edit"
+      >
+        <md-button class="md-round md-success">Edit</md-button>
+      </router-link>
     </md-card-content>
   </md-card>
 </template>

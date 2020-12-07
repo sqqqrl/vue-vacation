@@ -8,56 +8,38 @@
 
       <md-card-content>
         <div class="md-layout">
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>Company (disabled)</label>
-              <md-input v-model="disabled" disabled></md-input>
+              <md-input v-model="user.disabled" disabled></md-input>
             </md-field>
           </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
+          <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>User Name</label>
-              <md-input v-model="username" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>Email Address</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <md-input v-model="user.username" type="text">{{ $currentUser.username }}</md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>First Name</label>
-              <md-input v-model="firstname" type="text"></md-input>
+              <md-input v-model="user.firstname" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>Last Name</label>
-              <md-input v-model="lastname" type="text"></md-input>
+              <md-input v-model="user.lastname" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
               <label>Adress</label>
-              <md-input v-model="address" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>City</label>
-              <md-input v-model="city" type="text"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-50">
-            <md-field>
-              <label>Country</label>
-              <md-input v-model="country" type="text"></md-input>
+              <md-input v-model="user.address" type="text"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
-            <md-button class="md-raised md-success">Update Profile</md-button>
+            <md-button class="md-raised md-success" @click="updateProfile">Update Profile</md-button>
           </div>
         </div>
       </md-card-content>
@@ -65,23 +47,38 @@
   </form>
 </template>
 <script>
+import { UsersService } from "@/services/users.service";
+
 export default {
   name: "edit-profile-form",
   data() {
     return {
-      username: null,
-      disabled: null,
-      emailadress: null,
-      lastname: null,
-      firstname: null,
-      address: null,
-      city: null,
-      country: null,
-      code: null,
-      aboutme:
-        "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.",
-      dataBackgroundColor: "green"
+      user: {
+        username: null,
+        disabled: null,
+        lastname: null,
+        firstname: null,
+        address: null
+      },
+      dataBackgroundColor: "green",
+      error: ""
     };
+  },
+
+  created: function () {
+    this.$_.merge(this.user, this.$currentUser)
+  },
+
+  methods: {
+    async updateProfile() {
+      try {
+        const response = await UsersService.update(this.user);
+        this.error = "";
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 };
 </script>
