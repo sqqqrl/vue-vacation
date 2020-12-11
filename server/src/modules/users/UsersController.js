@@ -8,6 +8,7 @@ class UsersController extends BaseController {
     router.get('/users/current', this.actionRunner(actions.GetCurrentUserAction))
 
     router.post('/users/create', this.actionRunner(actions.CreateUserAction))
+    router.post('/users/checkEmail', this.actionRunner(actions.CheckEmailAction))
 
     router.patch('/users', this.actionRunner(actions.UpdateUserAction))
     return router
