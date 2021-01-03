@@ -20,8 +20,12 @@
                       v-model="form.email"
                       :disabled="sending"
                     ></md-input>
-                    <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-                    <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+                    <span class="md-error" v-if="!$v.form.email.required"
+                      >The email is required</span
+                    >
+                    <span class="md-error" v-else-if="!$v.form.email.email"
+                      >Invalid email</span
+                    >
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -34,8 +38,14 @@
                       v-model="form.password"
                       :disabled="sending"
                     ></md-input>
-                    <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
-                    <span class="md-error" v-else-if="!$v.form.password.minLength">Invalid password</span>
+                    <span class="md-error" v-if="!$v.form.password.required"
+                      >The password is required</span
+                    >
+                    <span
+                      class="md-error"
+                      v-else-if="!$v.form.password.minLength"
+                      >Invalid password</span
+                    >
                   </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-center">
@@ -61,13 +71,13 @@
 
 <script>
 import { AuthService } from "@/services/auth.service";
-import { validationMixin } from 'vuelidate';
+import { validationMixin } from "vuelidate";
 import {
   required,
   email,
-  minLength,
+  minLength
   // maxLength
-} from 'vuelidate/lib/validators';
+} from "vuelidate/lib/validators";
 
 export default {
   name: "LoginUser",
@@ -77,7 +87,7 @@ export default {
       dataBackgroundColor: "green",
       form: {
         email: "",
-        password: "",
+        password: ""
       },
       sending: false,
       error: ""
@@ -96,13 +106,13 @@ export default {
     }
   },
   methods: {
-    getValidationClass (fieldName) {
-      const field = this.$v.form[fieldName]
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
 
       if (field) {
         return {
-          'md-invalid': field.$invalid && field.$dirty
-        }
+          "md-invalid": field.$invalid && field.$dirty
+        };
       }
     },
 
@@ -125,11 +135,11 @@ export default {
       }
     },
 
-    validateUser () {
-      this.$v.$touch()
+    validateUser() {
+      this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.makeLogin()
+        this.makeLogin();
       }
     }
   }

@@ -7,7 +7,6 @@
             <md-card-header :data-background-color="dataBackgroundColor">
               <h4 class="title">Sign up</h4>
             </md-card-header>
-
             <md-card-content>
               <div class="md-layout">
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -20,8 +19,8 @@
                       v-model="form.username"
                       :disabled="sending"
                     ></md-input>
-                    <span class="md-error" v-if="!$v.form.email.required">The username is required</span>
-                    <span class="md-error" v-else-if="!$v.form.email.minLength">Invalid username</span>
+                    <span class="md-error" v-if="!$v.form.username.required">The username is required</span>
+                    <span class="md-error" v-else-if="!$v.form.username.minLength">Invalid username</span>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -31,11 +30,15 @@
                       type="email"
                       name="email"
                       id="email"
-                      v-model="form.email"
+                      @input="setEmail"
                       :disabled="sending"
                     ></md-input>
-                    <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-                    <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+                    <span class="md-error" v-if="!$v.form.email.required"
+                      >The email is required</span
+                    >
+                    <span class="md-error" v-else-if="!$v.form.email.email"
+                      >Invalid email</span
+                    >
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -75,16 +78,19 @@
 
 <script>
 import { UsersService } from "@/services/users.service";
-import { validationMixin } from 'vuelidate';
+import { validationMixin } from "vuelidate";
 import {
   required,
   email,
-  minLength,
+  minLength
   // maxLength
-} from 'vuelidate/lib/validators';
+} from "vuelidate/lib/validators";
+
+const cst = async value =>
+  console.log(await UsersService.emailAvailability(value));
 
 export default {
-  name: "LoginUser",
+  name: "RegisterUser",
   mixins: [validationMixin],
   data() {
     return {
@@ -92,17 +98,19 @@ export default {
       form: {
         username: "",
         email: "",
-        password: "",
+        password: ""
       },
       sending: false,
       error: ""
     };
   },
+
   validations: {
     form: {
       email: {
         required,
-        email
+        email,
+        cst
       },
       password: {
         required,
@@ -115,12 +123,12 @@ export default {
     }
   },
   methods: {
-    getValidationClass (fieldName) {
-      const field = this.$v.form[fieldName]
+    getValidationClass(fieldName) {
+      const field = this.$v.form[fieldName];
       if (field) {
         return {
-          'md-invalid': field.$invalid && field.$dirty
-        }
+          "md-invalid": field.$invalid && field.$dirty
+        };
       }
     },
 
@@ -147,19 +155,18 @@ export default {
       }
     },
 
-    
-    validateUser () {
-      this.$v.$touch()
+    validateUser() {
+      this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.register()
+        this.register();
       }
     },
 
     notifyVue({ verticalAlign, horizontalAlign, msg }) {
       this.$notify({
         message: msg,
-        icon: "add_alert",  
+        icon: "add_alert",
         horizontalAlign: horizontalAlign,
         verticalAlign: verticalAlign,
         type: "info",
@@ -167,6 +174,19 @@ export default {
           await this.$router.push("auth");
         }
       });
+    },
+
+    setEmail(value) {
+      this.form.email = value;
+      this.$v.form.email.$touch();
+    },
+
+    debounceEmail: function (e) {
+      return this.$_.debounce(function (e) {
+        console.log(e);
+        // console.log({...this.form});
+        // this.form.email = e
+      }, 800, {leading: false, trailing: true})
     }
   }
 };

@@ -20,6 +20,20 @@ export class UsersService extends BaseService {
     }
   }
 
+  static async emailAvailability(email) {
+    try {
+      const response = await this.request().post(`${this.entity}/checkEmail`, {
+        email: email
+      });
+      return new ResponseWrapper(response, response.data.data);
+    } catch (error) {
+      const message = error.response.data
+        ? error.response.data.error
+        : error.response.statusText;
+      throw new ErrorWrapper(error, message);
+    }
+  }
+
   // static async createUser(data = {}) {
   //   try {
   //     await this.create(data)
