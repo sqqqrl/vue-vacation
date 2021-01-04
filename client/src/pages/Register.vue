@@ -30,7 +30,7 @@
                       type="email"
                       name="email"
                       id="email"
-                      @input="setEmail"
+                      @input="debounceEmail"
                       :disabled="sending"
                     ></md-input>
                     <span class="md-error" v-if="!$v.form.email.required"
@@ -38,6 +38,9 @@
                     >
                     <span class="md-error" v-else-if="!$v.form.email.email"
                       >Invalid email</span
+                    >
+                    <span class="md-error" v-else-if="!$v.form.email.isUnique"
+                      >Email already in use</span
                     >
                   </md-field>
                 </div>
@@ -85,9 +88,7 @@ import {
   minLength
   // maxLength
 } from "vuelidate/lib/validators";
-
-const cst = async value =>
-  console.log(await UsersService.emailAvailability(value));
+import _ from 'lodash';
 
 export default {
   name: "RegisterUser",
@@ -110,7 +111,9 @@ export default {
       email: {
         required,
         email,
-        cst
+        async uniqueEmail(value) {
+          return (await UsersService.emailAvailability(value)).data.available
+        } 
       },
       password: {
         required,
@@ -176,18 +179,11 @@ export default {
       });
     },
 
-    setEmail(value) {
-      this.form.email = value;
-      this.$v.form.email.$touch();
-    },
-
-    debounceEmail: function (e) {
-      return this.$_.debounce(function (e) {
-        console.log(e);
-        // console.log({...this.form});
-        // this.form.email = e
-      }, 800, {leading: false, trailing: true})
-    }
+    debounceEmail: 
+      _.debounce(function (e) {
+        this.form.email = e;
+        this.$v.form.email.$touch();
+      }, 400, {leading: false, trailing: true})
   }
 };
 </script>
