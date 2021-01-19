@@ -2,16 +2,18 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 class MongoDB {
-  constructor ({ host, port, dbname, logger }) {
+  constructor ({ host, port, dbname, dbuser, dbpassword, logger }) {
     logger.info('MongoDB start initialization...')
-    return start({ host, port, dbname, logger })
+    return start({ host, port, dbname, dbuser, dbpassword, logger })
   }
 }
 
-function start ({ host, port, dbname, logger }) {
+function start ({ host, port, dbname, dbuser, dbpassword, logger }) {
+  console.log(`mongodb://${dbuser}:${dbpassword}@${host}/${dbname}?retryWrites=true&w=majority`)
   return new Promise(async (resolve, reject) => {
     mongoose
-      .connect(`mongodb://${host}:${port}/${dbname}`, {
+    // mongodb://username:password@host:port/database?options...
+      .connect(`mongodb://${dbuser}:${dbpassword}@${host}/${dbname}?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
       })
