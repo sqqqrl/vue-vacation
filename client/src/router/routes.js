@@ -1,11 +1,12 @@
-import loginPage from "../pages/Login.vue";
-import registerPage from "../pages/Register.vue";
+import LoginPage from "../pages/Login.vue";
+import RegisterPage from "../pages/Register.vue";
 
 
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
+import Vacation from "@/pages/Vacation.vue";
 import { EditProfileForm, UserCard } from "@/pages";
 
 export const routes = [
@@ -40,51 +41,21 @@ export const routes = [
         ]
       },
       {
+        path: "vacation",
+        name: "Vacation",
+        meta: { isAuth: true },
+        component: Vacation
+      },
+      {
         path: "auth",
         name: "Login",
-        component: loginPage
+        component: LoginPage
       },
       {
         path: "register",
         name: "Sign up",
-        component: registerPage
+        component: RegisterPage
       }
     ]
   }
-  // {
-  //   path: "/",
-  //   name: "index",
-  //   component: homePage,
-  //   meta: { title: `${DOMAIN_TITLE} | home` }
-  // },
-  // {
-  //   path: '/news',
-  //   name: 'news',
-  //   component: newsPage,
-  //   meta: { title: `${DOMAIN_TITLE} | news` },
-  //   props: routePropResolver
-  // },
-  // {
-  //   path: '/profile',
-  //   component: profilePage,
-  //   meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
-  // children: [
-  //   {
-  //     path: '',
-  //     name: 'profile',
-  //     component: profilePostsPage
-  //   }
-  // ]
-  // },
-  // {
-  //   path: "/auth",
-  //   name: "login",
-  //   component: loginPage,
-  //   meta: { title: `${DOMAIN_TITLE} | login` }
-  // },
-  // {
-  //   path: "*",
-  //   component: notFoundPage,
-  //   meta: { title: `${DOMAIN_TITLE} | not found` }
-  // }
 ];

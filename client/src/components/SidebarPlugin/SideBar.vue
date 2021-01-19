@@ -12,7 +12,7 @@
         </div>
       </a>
 
-      <a href="#" target="_blank" class="simple-text logo-normal">
+      <a href="#" class="simple-text logo-normal">
         {{ title }}
       </a>
     </div>
@@ -43,7 +43,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD"
+      default: "Vacation"
     },
     sidebarBackgroundImage: {
       type: String,

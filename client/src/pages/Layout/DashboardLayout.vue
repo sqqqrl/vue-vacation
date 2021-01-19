@@ -16,6 +16,10 @@
           <md-icon>person</md-icon>
           <p>User Profile</p>
         </sidebar-link>
+        <sidebar-link to="/vacation">
+          <md-icon>vacation</md-icon>
+          <p>Vacation</p>
+        </sidebar-link>
         <li class="md-list-item">
           <div id="logout" class="md-list-item-router md-list-item-container md-button-clean" @click="logout">
             <div class="md-list-item-content md-ripple">
@@ -24,12 +28,6 @@
             </div>
           </div>
         </li>
-        <!-- <li class="md-list-item">
-          <a href="#" class="md-list-item-router md-list-item-container md-button-clean nav-item">
-            <div class="md-list-item-content md-ripple">
-            </div>
-          </a>
-        </li> -->
       </template>
 
       <template v-else>
