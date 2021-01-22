@@ -32,8 +32,6 @@ config.rootInit().then(() => {
       host: config.mongo.connection.host,
       port: config.mongo.connection.port,
       dbname: config.mongo.connection.database,
-      dbuser: config.mongo.connection.user,
-      dbpassword: config.mongo.connection.password,
       logger
     })
   })
