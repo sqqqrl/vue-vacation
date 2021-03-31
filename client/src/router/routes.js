@@ -6,7 +6,7 @@ import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import Vacation from "@/pages/Vacation.vue";
+import Vacation from "@/pages/Vacation/Index.vue";
 import { EditProfileForm, UserCard } from "@/pages";
 
 export const routes = [
