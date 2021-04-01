@@ -10,7 +10,11 @@ const User = mongoose.model(
     firstname: String,
     lastname: String,
     adress: String,
-    phone: Number
+    phone: Number,
+    positionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Position"
+    }
   })
 );
 
