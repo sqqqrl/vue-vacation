@@ -6,6 +6,14 @@ class PositionDAO extends BaseDAO {
     return PositionModel
   }
 
+  static async getPosition (id) {
+    let data = (await PositionModel.findById(id)).toObject()
+
+    if (!data) throw this.errorEmptyResponse()
+    
+    return data
+  }
+
   // static async getByName (name) {
   //   const data = await PositionModel.findOne({ name: name })
     

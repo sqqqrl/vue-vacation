@@ -11,7 +11,7 @@ const User = mongoose.model(
     lastname: String,
     adress: String,
     phone: Number,
-    positionId: {
+    position: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Position"
     }

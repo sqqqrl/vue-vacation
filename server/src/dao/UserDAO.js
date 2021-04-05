@@ -17,7 +17,7 @@ class UserDAO extends BaseDAO {
   static async getCurrentUser (id) {
     let data = (await UserModel.findById(id)).toObject()
 
-    if (!data) throw this.errorEmptyResponse()
+    if (!data) throw this.errorEmptyRespdonse()
     // delete sensitive data from current user
     delete data.password;
     
