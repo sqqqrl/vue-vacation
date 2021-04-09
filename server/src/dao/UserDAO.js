@@ -15,7 +15,11 @@ class UserDAO extends BaseDAO {
   }
 
   static async getCurrentUser (id) {
-    let data = (await UserModel.findById(id)).toObject()
+    let data = (
+      await UserModel.findById(id)
+        .populate('position')
+        .exec()
+      ).toObject()
 
     if (!data) throw this.errorEmptyRespdonse()
     // delete sensitive data from current user

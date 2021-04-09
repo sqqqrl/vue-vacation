@@ -11,6 +11,7 @@ class UsersController extends BaseController {
     router.post('/users/checkEmail', this.actionRunner(actions.CheckEmailAction))
 
     router.patch('/users', this.actionRunner(actions.UpdateUserAction))
+    router.patch('/users/setPosition', this.actionRunner(actions.SetPositionAction))
     return router
   }
 
