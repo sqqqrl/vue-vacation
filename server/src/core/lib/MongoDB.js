@@ -9,11 +9,9 @@ class MongoDB {
 }
 
 function start ({ host, port, dbname, dbuser, dbpassword, logger }) {
-  console.log(`mongodb://${dbuser}:${dbpassword}@${host}/${dbname}?retryWrites=true&w=majority`)
   return new Promise(async (resolve, reject) => {
     mongoose
-    // mongodb://username:password@host:port/database?options...
-      .connect(`mongodb://${dbuser}:${dbpassword}@${host}/${dbname}?retryWrites=true&w=majority`, {
+      .connect(`mongodb://${host}:27017/${dbname}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
       })

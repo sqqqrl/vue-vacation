@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 // const { AbstractLogger } = require('./AbstractLogger')
 
 class Server {
-  constructor ({ port, host, controllers, middlewares, cookieSecret, reqLimit = '5mb', logger }) {
+  constructor ({ port, host, controllers, middlewares, errorMiddleware, cookieSecret, reqLimit = '5mb', logger }) {
 
     /**
      * 
@@ -18,11 +18,11 @@ class Server {
      **/
 
     logger.info('Server start initialization...')
-    return start({ port, host, controllers, middlewares, cookieSecret, reqLimit, logger })
+    return start({ port, host, controllers, middlewares, ErrorMiddleware: errorMiddleware, cookieSecret, reqLimit, logger })
   }
 }
 
-function start ({ port, host, controllers, middlewares, cookieSecret, reqLimit, logger }) {
+function start ({ port, host, controllers, middlewares, ErrorMiddleware, cookieSecret, reqLimit, logger }) {
   return new Promise(async (resolve, reject) => {
     const app = express()
 
@@ -59,13 +59,13 @@ function start ({ port, host, controllers, middlewares, cookieSecret, reqLimit, 
     /**
      * error handler
      */
-    // try {
-    //   // const middleware = new ErrorMiddleware({ logger })
-    //   // await middleware.init()
-    //   app.use(middleware.handler())
-    // } catch (e) {
-    //   return reject(e)
-    // }
+    try {
+      const middleware = new ErrorMiddleware({ logger })
+      await middleware.init()
+      app.use(middleware.handler())
+    } catch (e) {
+      return reject(e)
+    }
 
     /**
      * Not found route handler
