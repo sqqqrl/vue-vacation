@@ -1,6 +1,10 @@
-const { errorCodes, AppError } = require('server-core')
+const { errorCodes, AppError, assert } = require('server-core')
+const { RefreshSessionEntity } = require('./RefreshSessionEntity')
 
 function verifyRefreshSession (oldRefreshSession, newFingerprint) {
+  assert.instanceOf(oldRefreshSession, RefreshSessionEntity)
+  assert.string(newFingerprint, { notEmpty: true })
+
   return new Promise((resolve, reject) => {
     const nowTime = new Date().getTime()
 

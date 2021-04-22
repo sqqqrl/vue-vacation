@@ -1,3 +1,5 @@
+const { assert } = require('server-core')
+
 const { jwtSign } = require('../../../rootcommon/jwt')
 
 const SECRET = require('../../../config').token.access.secret
@@ -6,6 +8,8 @@ const type = require('../../../config').token.access.type
 const iss = require('../../../config').token.jwtIss
 
 function makeAccessToken (userEntity) {
+  assert.object(userEntity, { required: true })
+
   let config = {
     payload: {
       tokenType: type,
