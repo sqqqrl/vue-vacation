@@ -12,6 +12,7 @@
     "@sentry/node": "^5.27.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -26,7 +27,9 @@
     "nodemon": "^2.0.4",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
+    "stack-trace": "0.0.10",
+    "stdout-stream": "^1.4.1",
     "stream": "0.0.2",
-    "uuid": "^8.3.1"
+    "uuid": "^8.3.2"
   }
 }

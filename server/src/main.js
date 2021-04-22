@@ -1,6 +1,7 @@
 require('dotenv').config()
 const config = require('./config')
 const middlewares = require('./middlewares')
+const errorMiddleware = require('./middlewares/errorMiddleware')
 const controllers = require('./controllers')
 const logger = require('./logger')
 
@@ -12,6 +13,7 @@ config.rootInit().then(() => {
     host: config.app.host,
     controllers,
     middlewares,
+    errorMiddleware,
     cookieSecret: config.app.cookieSecret,
     logger
   })
