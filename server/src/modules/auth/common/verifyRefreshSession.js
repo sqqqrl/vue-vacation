@@ -1,4 +1,4 @@
-const { errorCodes, AppError } = require('../../../validator')
+const { errorCodes, AppError } = require('server-core')
 
 function verifyRefreshSession (oldRefreshSession, newFingerprint) {
   return new Promise((resolve, reject) => {

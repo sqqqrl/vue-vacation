@@ -1,8 +1,7 @@
 const ms = require('ms')
 
-const { AppError, errorCodes } = require('../../../validator')
+const { AppError, errorCodes, CookieEntity } = require('server-core')
 const { UserDAO } = require('../../../dao/UserDAO')
-const { CookieEntity } = require('../../../core/index')
 const { checkPassword } = require('../../../rootcommon/checkPassword')
 const { makeAccessToken } = require('../common/makeAccessToken')
 const { BaseAction } = require('../../../rootcommon/BaseAction')

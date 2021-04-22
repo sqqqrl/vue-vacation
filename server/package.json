@@ -30,6 +30,7 @@
     "stack-trace": "0.0.10",
     "stdout-stream": "^1.4.1",
     "stream": "0.0.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "server-core": "./src/core"
   }
 }

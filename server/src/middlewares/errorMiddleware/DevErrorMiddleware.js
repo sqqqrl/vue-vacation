@@ -1,9 +1,8 @@
 const stdout = require('stdout-stream')
 const chalk = require('chalk')
 const stackTrace = require('stack-trace')
-const { errorCodes } = require('../../validator/index')
+const { errorCodes, BaseMiddleware } = require('server-core')
 const ErrorResponse = require('./ErrorResponse')
-const { BaseMiddleware } = require('../../core/index')
 
 const notImportantCodes = [400, 401, 403, 404, 422]
 

@@ -1,4 +1,6 @@
-const { AppError, errorCodes } = require('../validator')
+const errorCodes = require('./errorCodes')
+const { AppError } = require('./AppError')
+const { Assert: assert } = require('./assert')
 
 class BaseDAO {
   static errorEmptyResponse () {

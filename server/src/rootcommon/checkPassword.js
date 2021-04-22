@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { errorCodes, AppError } = require('../validator')
+const { errorCodes, AppError } = require('server-core')
 
 function checkPassword (password, hash) {
   return new Promise((resolve, reject) => {

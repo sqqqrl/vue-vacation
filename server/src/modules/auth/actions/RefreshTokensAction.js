@@ -1,5 +1,5 @@
 const ms = require('ms')
-const { AppError, errorCodes } = require('../../../validator')
+const { AppError, errorCodes, CookieEntity } = require('server-core')
 
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { addRefreshSession } = require('../common/addRefreshSession')
@@ -8,7 +8,6 @@ const { verifyRefreshSession } = require('../common/verifyRefreshSession')
 const { RefreshSessionEntity } = require('../common/RefreshSessionEntity')
 const { UserDAO } = require('../../../dao/UserDAO')
 const { RefreshSessionDAO } = require('../../../dao/RefreshSessionDAO')
-const { CookieEntity } = require('../../../core')
 const config = require('../../../config')
 
 class RefreshTokensAction extends BaseAction {

@@ -2,7 +2,7 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 const logger = require('../logger')
 
-const { BaseConfig } = require('../rootcommon/BaseConfig')
+const { BaseConfig } = require('server-core')
 
 class MongodbConfig extends BaseConfig {
   constructor () {

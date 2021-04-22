@@ -41,3 +41,5 @@ class Assert {
     }
   }
 }
+
+module.exports = { Assert }

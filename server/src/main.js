@@ -1,11 +1,10 @@
 require('dotenv').config()
-const config = require('./config')
-const middlewares = require('./middlewares')
-const errorMiddleware = require('./middlewares/errorMiddleware')
 const controllers = require('./controllers')
+const middlewares = require('./middlewares')
+const config = require('./config')
+const { Server, MongoDB } = require('server-core')
+const errorMiddleware = require('./middlewares/errorMiddleware')
 const logger = require('./logger')
-
-const { Server, MongoDB } = require('./core/index')
 
 config.rootInit().then(() => {
   return new Server({

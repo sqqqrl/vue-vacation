@@ -1,4 +1,4 @@
-const { BaseConfig } = require('../rootcommon/BaseConfig')
+const { BaseConfig } = require('server-core')
 const logger = require('../logger')
 
 class AppConfig extends BaseConfig {
