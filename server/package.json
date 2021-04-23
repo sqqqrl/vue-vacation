@@ -27,10 +27,11 @@
     "nodemon": "^2.0.4",
     "pino": "^6.7.0",
     "pino-pretty": "^4.3.0",
+    "server-core": "./src/core",
     "stack-trace": "0.0.10",
     "stdout-stream": "^1.4.1",
     "stream": "0.0.2",
     "uuid": "^8.3.2",
-    "server-core": "./src/core"
+    "validator": "^13.6.0"
   }
 }
