@@ -1,4 +1,4 @@
-const { AppError, errorCodes } = require('../../../validator')
+const { AppError, errorCodes } = require('server-core')
 
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { RefreshSessionDAO } = require('../../../dao/RefreshSessionDAO')

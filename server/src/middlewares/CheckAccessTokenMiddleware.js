@@ -1,4 +1,4 @@
-const { errorCodes } = require('../validator/errorCodes')
+const { errorCodes } = require('server-core')
 const { jwtVerify } = require('../rootcommon/jwt')
 const SECRET = require('../config').token.access.secret
 // const roles = require('../permissions/roles')

@@ -1,9 +1,12 @@
+const { assert } = require('server-core')
 const { RefreshSessionDAO } = require('../../../dao/RefreshSessionDAO')
-const { UserModel } = require('../../../models/UserModel')
+const { RefreshSessionEntity } = require('./RefreshSessionEntity')
 
 const MAX_REFRESH_SESSIONS_COUNT = 5
 
 async function addRefreshSession (refreshSession) {
+  assert.instanceOf(refreshSession, RefreshSessionEntity)
+
   if (await _isValidSessionsCount(refreshSession.userId)) {
     await _addRefreshSession(refreshSession)
   } else {

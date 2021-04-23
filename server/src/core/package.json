@@ -1,0 +1,9 @@
+{
+  "name": "server-core",
+  "version": "1.0.0",
+  "description": "server-core package",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "license": "MIT"
+}

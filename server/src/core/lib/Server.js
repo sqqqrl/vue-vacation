@@ -3,26 +3,28 @@ const path = require('path')
 const morganLogger = require('morgan')
 const cookieParser = require('cookie-parser')
 
-
-// const { AbstractLogger } = require('./AbstractLogger')
+const { Assert: assert } = require('./assert')
+const { AbstractLogger } = require('./AbstractLogger')
+const { BaseMiddleware } = require('./BaseMiddleware')
 
 class Server {
-  constructor ({ port, host, controllers, middlewares, cookieSecret, reqLimit = '5mb', logger }) {
+  constructor ({ port, host, controllers, middlewares, errorMiddleware, cookieSecret, reqLimit = '5mb', logger }) {
 
-    /**
-     * 
-     * 
-     * TODO: TESTS FOR INCOMING PARAMS
-     * 
-     *  
-     **/
+    assert.integer(port, { required: true, min: 1000 })
+    assert.string(host, { required: true, notEmpty: true })
+    assert.array(controllers, { required: true, notEmpty: true, message: 'controllers param expects not empty array' })
+    assert.array(middlewares, { required: true, notEmpty: true, message: 'middlewares param expects not empty array' })
+    assert.instanceOf(errorMiddleware.prototype, BaseMiddleware)
+    assert.string(cookieSecret)
+    assert.string(reqLimit)
+    assert.instanceOf(logger, AbstractLogger)
 
     logger.info('Server start initialization...')
-    return start({ port, host, controllers, middlewares, cookieSecret, reqLimit, logger })
+    return start({ port, host, controllers, middlewares, ErrorMiddleware: errorMiddleware, cookieSecret, reqLimit, logger })
   }
 }
 
-function start ({ port, host, controllers, middlewares, cookieSecret, reqLimit, logger }) {
+function start ({ port, host, controllers, middlewares, ErrorMiddleware, cookieSecret, reqLimit, logger }) {
   return new Promise(async (resolve, reject) => {
     const app = express()
 
@@ -59,13 +61,13 @@ function start ({ port, host, controllers, middlewares, cookieSecret, reqLimit, 
     /**
      * error handler
      */
-    // try {
-    //   // const middleware = new ErrorMiddleware({ logger })
-    //   // await middleware.init()
-    //   app.use(middleware.handler())
-    // } catch (e) {
-    //   return reject(e)
-    // }
+    try {
+      const middleware = new ErrorMiddleware({ logger })
+      await middleware.init()
+      app.use(middleware.handler())
+    } catch (e) {
+      return reject(e)
+    }
 
     /**
      * Not found route handler

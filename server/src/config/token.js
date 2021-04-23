@@ -1,4 +1,4 @@
-const { BaseConfig } = require('../rootcommon/BaseConfig')
+const { BaseConfig } = require('server-core')
 const expiresInRegexp = /^(\d\d?m$|\d\d?h$|\d\d?d$)/
 const logger = require('../logger')
 

@@ -1,8 +1,9 @@
 
+const { AppError, errorCodes } = require('server-core')
+
 const { UserDAO } = require('../../../dao/UserDAO')
 const { BaseAction } = require('../../../rootcommon/BaseAction')
 const { makePasswordHash } = require('../common/makePasswordHash')
-const { AppError, errorCodes } = require('../../../validator')
 
 class CreateUserAction extends BaseAction {
   static async run (ctx) {

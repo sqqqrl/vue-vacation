@@ -1,4 +1,4 @@
-const { Logger } = require('./core/index')
+const { Logger } = require('server-core')
 const sentryDsn = process.env.SENTRY_DSN
 const isDev = process.env.NODE_ENV === 'development'
 

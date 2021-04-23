@@ -1,13 +1,22 @@
+const { errorCodes, AppError, assert, AbstractLogger } = require('server-core')
+
 class BaseController {
   constructor ({ logger } = {}) {
     if (!this.init) throw new Error(`${this.constructor.name} should implement 'init' method.`)
     if (!this.router) throw new Error(`${this.constructor.name} should implement 'router' getter.`)
+    assert.instanceOf(logger, AbstractLogger)
 
     this.logger = logger
   }
 
   actionRunner (action) {
+    assert.func(action, { required: true })
+
     return async (req, res, next) => {
+      assert.object(req, { required: true })
+      assert.object(res, { required: true })
+      assert.func(next, { required: true })
+
       const ctx = {
         currentUser: req.currentUser,
         body: req.body,
@@ -43,6 +52,7 @@ class BaseController {
             res.cookie(cookie.name, cookie.value, cookie.options)
           }
         }
+
         return res.status(response.status).json({
           success: response.success,
           message: response.message,

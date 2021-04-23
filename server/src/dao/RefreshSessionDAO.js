@@ -1,4 +1,4 @@
-const { BaseDAO } = require('./BaseDAO')
+const { BaseDAO, assert } = require('server-core')
 const RefreshSessionModel = require('../models/RefreshSessionModel')
 
 class RefreshSessionDAO extends BaseDAO {
