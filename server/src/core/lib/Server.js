@@ -3,19 +3,21 @@ const path = require('path')
 const morganLogger = require('morgan')
 const cookieParser = require('cookie-parser')
 
-
-// const { AbstractLogger } = require('./AbstractLogger')
+const { Assert: assert } = require('./assert')
+const { AbstractLogger } = require('./AbstractLogger')
+const { BaseMiddleware } = require('./BaseMiddleware')
 
 class Server {
   constructor ({ port, host, controllers, middlewares, errorMiddleware, cookieSecret, reqLimit = '5mb', logger }) {
 
-    /**
-     * 
-     * 
-     * TODO: TESTS FOR INCOMING PARAMS
-     * 
-     *  
-     **/
+    assert.integer(port, { required: true, min: 1000 })
+    assert.string(host, { required: true, notEmpty: true })
+    assert.array(controllers, { required: true, notEmpty: true, message: 'controllers param expects not empty array' })
+    assert.array(middlewares, { required: true, notEmpty: true, message: 'middlewares param expects not empty array' })
+    assert.instanceOf(errorMiddleware.prototype, BaseMiddleware)
+    assert.string(cookieSecret)
+    assert.string(reqLimit)
+    assert.instanceOf(logger, AbstractLogger)
 
     logger.info('Server start initialization...')
     return start({ port, host, controllers, middlewares, ErrorMiddleware: errorMiddleware, cookieSecret, reqLimit, logger })

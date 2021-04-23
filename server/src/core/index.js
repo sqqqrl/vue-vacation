@@ -12,6 +12,7 @@ const { SentryCatch } = require('./lib/SentryCatch')
 const { Server } = require('./lib/Server')
 const { Logger } = require('./lib/Logger')
 const { Rule } = require('./lib/Rule')
+const { RequestRule } = require('./lib/RequestRule')
 const { MongoDB } = require('./lib/MongoDB')
 const { CookieEntity } = require('./lib/CookieEntity')
 const { BaseMiddleware } = require('./lib/BaseMiddleware')
@@ -29,6 +30,7 @@ module.exports = {
 
   AppError,
   Rule,
+  RequestRule,
   SentryCatch,
   Server,
   Logger,

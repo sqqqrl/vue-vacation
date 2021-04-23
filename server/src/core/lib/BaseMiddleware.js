@@ -1,7 +1,10 @@
 const { AbstractLogger } = require('./AbstractLogger')
+const { Assert: assert } = require('./assert')
 
 class BaseMiddleware {
   constructor ({ logger } = {}) {
+    assert.instanceOf(logger, AbstractLogger)
+
     this.logger = logger
   }
 

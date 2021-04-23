@@ -20,6 +20,8 @@ class BaseDAO {
   }
 
   static baseCreate (entity = {}) {
+    assert.object(entity, { required: true })
+
     return this
       .createModel(entity)
       .save()
@@ -27,11 +29,16 @@ class BaseDAO {
   }
 
   static baseUpdate (id, entity = {}) {
+    assert.id(id, { required: true })
+    assert.object(entity, { required: true })
+
     return this.model
       .findByIdAndUpdate({ _id: id }, entity)
   }
 
   static async baseGetCount (filter = {}) {
+    assert.object(filter, { required: true })
+
     const result = await this.model.countDocuments(filter)
     return result
   }
@@ -41,6 +48,8 @@ class BaseDAO {
   }
 
   static async baseGetById (id) {
+    assert.id(id, { required: true })
+
     const result = await this.model.findById(id)
     return result
   }

@@ -1,5 +1,6 @@
 const pino = require('pino')
 
+const { Assert: assert } = require('./assert')
 const { ValidatorNano: validator } = require('./validator/ValidatorNano')
 const { SentryCatch } = require('./SentryCatch')
 const { AbstractLogger } = require('./AbstractLogger')
@@ -9,6 +10,10 @@ const $ = Symbol('private scope')
 class Logger extends AbstractLogger {
   constructor ({ appName, capture = false, sentryDsn, raw = false } = {}) {
     super()
+
+    assert.string(appName, { required: true })
+    assert.boolean(capture)
+    assert.string(sentryDsn)
 
     if (capture && !sentryDsn) {
       throw new Error(`${this.constructor.name}: Please define 'sentryDsn' param`)
@@ -69,6 +74,10 @@ class Logger extends AbstractLogger {
    */
 
   fatal (message, error, meta) {
+    assert.string(message, { required: true })
+    assert.ok(error, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? { ...error, ...meta } : { ...error, meta }
 
     this._captureException(error, payload)
@@ -76,6 +85,10 @@ class Logger extends AbstractLogger {
   }
 
   error (message, error, meta) {
+    assert.string(message, { required: true })
+    assert.ok(error, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? { ...error, ...meta } : { ...error, meta }
 
     this._captureException(error, payload)
@@ -83,6 +96,10 @@ class Logger extends AbstractLogger {
   }
 
   warn (message, error, meta) {
+    assert.string(message, { required: true })
+    assert.ok(error, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? { ...error, ...meta } : { ...error, meta }
 
     this._captureException(error, payload)
@@ -96,6 +113,9 @@ class Logger extends AbstractLogger {
    */
 
   info (message, meta) {
+    assert.string(message, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? meta : { meta }
 
     this._captureMessage(message, payload)
@@ -103,12 +123,18 @@ class Logger extends AbstractLogger {
   }
 
   debug (message, meta) {
+    assert.string(message, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? meta : { meta }
 
     this[$].debugLogger.debug(payload, message)
   }
 
   trace (message, meta) {
+    assert.string(message, { required: true })
+    assert.ok(meta)
+
     const payload = validator.isObject(meta) ? meta : { meta }
 
     this[$].traceLogger.trace(payload, message)
