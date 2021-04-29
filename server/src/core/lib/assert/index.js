@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const { AssertionError } = require('./AssertionError')
 const { Rule } = require('../Rule')
 
@@ -145,6 +146,13 @@ class Assert {
     const isValidId = isPositiveInteger || isUiid
     if (!isValidId && required) Assert.fail(value, 'UUID or Number', message)
     if (value !== undefined && !isValidId) Assert.fail(value, 'UUID or Number', message)
+  }
+
+  static objectId (value, { required = false, message = '' } = {}) {
+    const isValidId = mongoose.Types.ObjectId.isValid(value)
+
+    if (!isValidId && required) Assert.fail(value, 'ObjectId', message)
+    if (value !== undefined && !isValidId) Assert.fail(value, 'ObjectId', message)
   }
 
   static uuid (value, { required = false, message = '' } = {}) {

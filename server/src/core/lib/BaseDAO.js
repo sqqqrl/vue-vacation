@@ -1,6 +1,7 @@
 const errorCodes = require('./errorCodes')
 const { AppError } = require('./AppError')
 const { Assert: assert } = require('./assert')
+const mongoose = require('mongoose')
 
 class BaseDAO {
   static errorEmptyResponse () {
@@ -29,7 +30,6 @@ class BaseDAO {
   }
 
   static baseUpdate (id, entity = {}) {
-    assert.id(id, { required: true })
     assert.object(entity, { required: true })
 
     return this.model
@@ -48,10 +48,12 @@ class BaseDAO {
   }
 
   static async baseGetById (id) {
-    assert.id(id, { required: true })
+    assert.objectId(id, { required: true })
 
-    const result = await this.model.findById(id)
-    return result
+    const data = this.model.findById(id).exec()
+    if (!data) throw this.errorEmptyResponse()
+    
+    return data
   }
 }
 

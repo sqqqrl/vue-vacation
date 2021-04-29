@@ -6,11 +6,11 @@ const { BaseAction } = require('../../../rootcommon/BaseAction')
 class CreateCompanyAction extends BaseAction {
   static async run (ctx) {
 
-    const user = await CompanyDAO.baseCreate({
+    const company = await CompanyDAO.baseCreate({
       ...ctx.body
     })
 
-    return this.result({ data: user })
+    return this.result({ data: company })
   }
 }
 

@@ -14,14 +14,27 @@ class UserDAO extends BaseDAO {
     return data
   }
 
+  static create (data) {
+    assert.object(data, { required: true })
+    assert.string(data.password, { notEmpty: true })
+
+    return this
+      .createModel(data)
+      .save()
+      .then(doc => this.clearSensativeData(doc))
+  }
+
   static async getCurrentUser (id) {
+    assert.objectId(id, { required: true })
+
     let data = (
-      await UserModel.findById(id)
+      await UserModel
+        .findById(id)
         .populate('position')
         .exec()
-      ).toObject()
+    ).toObject()
 
-    if (!data) throw this.errorEmptyRespdonse()
+    if (!data) throw this.errorEmptyResponse()
     // delete sensitive data from current user
     delete data.password;
     

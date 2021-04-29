@@ -1,4 +1,3 @@
-
 const { UserDAO } = require('../../../dao/UserDAO')
 const { PositionDAO } = require('../../../dao/PositionDAO')
 const { BaseAction } = require('../../../rootcommon/BaseAction')

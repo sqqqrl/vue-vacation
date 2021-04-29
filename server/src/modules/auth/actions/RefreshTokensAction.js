@@ -32,8 +32,6 @@ class RefreshTokensAction extends BaseAction {
     await verifyRefreshSession(new RefreshSessionEntity(oldRefreshSession), reqFingerprint)
     const user = await UserDAO.baseGetById(oldRefreshSession.userId)
 
-
-
     const newRefreshSession = new RefreshSessionEntity({
       userId: user.id,
       ip: ctx.ip,

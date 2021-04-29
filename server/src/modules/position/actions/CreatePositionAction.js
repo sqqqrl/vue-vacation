@@ -6,11 +6,11 @@ const { BaseAction } = require('../../../rootcommon/BaseAction')
 class CreatePositionAction extends BaseAction {
   static async run (ctx) {
 
-    const user = await PositionDAO.baseCreate({
+    const position = await PositionDAO.baseCreate({
       ...ctx.body
     })
 
-    return this.result({ data: user })
+    return this.result({ data: position })
   }
 }
 

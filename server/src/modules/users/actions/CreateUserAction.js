@@ -16,7 +16,7 @@ class CreateUserAction extends BaseAction {
     const hash = await makePasswordHash(ctx.body.password)
     delete ctx.body.password
 
-    const user = await UserDAO.baseCreate({
+    const user = await UserDAO.create({
       ...ctx.body,
       password: hash
     })

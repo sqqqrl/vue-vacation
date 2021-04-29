@@ -1,17 +1,9 @@
-const { BaseDAO } = require('./BaseDAO')
+const { BaseDAO } = require('server-core')
 const PositionModel = require('../models/PositionModel')
 
 class PositionDAO extends BaseDAO {
   static get model () {
     return PositionModel
-  }
-
-  static async getPosition (id) {
-    let data = await PositionModel.findById(id)
-
-    if (!data) throw this.errorEmptyResponse()
-    
-    return data
   }
 
   // static async getByName (name) {
